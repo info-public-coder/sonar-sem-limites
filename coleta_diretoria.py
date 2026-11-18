@@ -468,12 +468,63 @@ def ausencias(sede_info):
 
 # ---------- 5. pagamentos da URE (UG 080297)
 
+def indice_folha(cargo_por_nome):
+    """Indice dos nomes da folha da Educacao por (primeiro, ultimo nome), para
+    achar rapido os candidatos de cada nome. Nomes cortados em 30 letras (o
+    ultimo nome pode estar pela metade) ficam tambem num indice so pelo primeiro."""
+    por_par, cortados = collections.defaultdict(list), collections.defaultdict(list)
+    for k in cargo_por_nome:
+        t = tokens(k)
+        if len(t) < 2:
+            continue
+        por_par[(t[0], t[-1])].append(k)
+        if len(k) >= 30:
+            cortados[t[0]].append(k)
+    return por_par, cortados
+
+
+def cargo_do_credor(credor, cargo_por_nome, indice):
+    """Cargo de quem recebeu diaria, pela folha. Mesma regra dos cracha:
+    primeiro e ultimo nome iguais, nomes do meio por extenso ou inicial. Se
+    houver mais de uma pessoa compativel, so vale se todas tiverem o mesmo
+    cargo; senao fica sem cargo."""
+    k = chave(credor)[:30]
+    if k in cargo_por_nome and len(cargo_por_nome[k]) == 1:
+        return next(iter(cargo_por_nome[k]))
+    t = tokens(credor)
+    if len(t) < 2:
+        return None
+    por_par, cortados = indice
+    candidatos = list(dict.fromkeys(c for c in por_par.get((t[0], t[-1]), []) + cortados.get(t[0], [])
+                                    if mesmo_nome(credor, c)))
+    if not candidatos:
+        return None
+    exatos = [c for c in candidatos if tokens(c) == t]
+    if exatos:
+        candidatos = exatos
+    else:
+        # O candidato que confere mais nomes do meio vence ("MARIA ISABEL CRISTINA C MORAES"
+        # ganha de "MARIA CRISTINA DE MORAES" para "MARIA ISABEL CRISTINA CASTILHO DE MORAES").
+        melhor = max(len(tokens(c)) for c in candidatos)
+        candidatos = [c for c in candidatos if len(tokens(c)) == melhor]
+    cargos = set()
+    for c in candidatos:
+        cargos |= cargo_por_nome[c]
+    # "OUTROS VINCULOS" e um segundo vinculo da mesma pessoa, nao outro cargo
+    cargos = {c for c in cargos if "OUTROS VINCULOS" not in c.upper()} or cargos
+    if len(cargos) == 1:
+        return next(iter(cargos))
+    # Mais de um cargo possivel: guarda todos ("A|B"); o gerador decide se caem no mesmo grupo.
+    return "|".join(sorted(cargos))
+
+
 def pagamentos(equipe, cargo_por_nome):
     urls = manuais(r"Pagamentos \d{4}.*\.zip")
     if not urls:
         achados = links_do_conjunto(CONJ_PAGAMENTOS, r"Pagamentos \d{4}.*\.zip")
         urls = achados if achados and isinstance(achados[0], str) else []
     nomes_equipe = {chave(p["nome"])[:30]: p["nome"] for p in equipe["pessoas"]}
+    indice, cache_cargo = indice_folha(cargo_por_nome), {}
     por_ano = {}
     for url in urls:
         ano = int(re.search(r"Pagamentos (\d{4})", urllib.parse.unquote(url)).group(1))
@@ -524,8 +575,9 @@ def pagamentos(equipe, cargo_por_nome):
                     item["pessoa_id"] = abs(hash(("radar", k))) % 10**9   # so para contar pessoas distintas
                     if k in nomes_equipe:
                         item["credor"] = nomes_equipe[k]
-                    cargos = cargo_por_nome.get(k, set())
-                    item["cargo"] = next(iter(cargos)) if len(cargos) == 1 else None
+                    if credor not in cache_cargo:
+                        cache_cargo[credor] = cargo_do_credor(credor, cargo_por_nome, indice)
+                    item["cargo"] = cache_cargo[credor]
                 else:
                     item["credor"] = credor
                 linhas.append(item)

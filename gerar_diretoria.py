@@ -51,6 +51,58 @@ def chave(txt):
     return re.sub(r"[^A-Z0-9 ]", "", t).strip()
 
 
+SEM_CARGO = "Nome não achado na folha da Educação"
+AMBIGUO = "Nome igual ao de mais de uma pessoa da folha, com cargos diferentes"
+
+
+def cargo_da_diaria(cargo):
+    """Resolve o cargo gravado pelo coletor: unico, varios ("A|B") ou nenhum."""
+    if not cargo:
+        return SEM_CARGO
+    if "|" not in cargo:
+        return cargo
+    opcoes = cargo.split("|")
+    grupos = {grupo_cargo(o) for o in opcoes}
+    if len(grupos) == 1:
+        return " ou ".join(opcoes)     # mesmo grupo (ex.: dois tipos de professor)
+    return AMBIGUO
+
+
+def grupo_cargo(cargo):
+    """Categoria do cargo, pelo nome que a folha do Estado usa."""
+    if cargo == SEM_CARGO:
+        return "Sem cargo: nome não achado na folha da Educação (quem entrou depois da última folha publicada pelo Estado não está nela)"
+    if cargo == AMBIGUO:
+        return "Sem cargo: mais de uma pessoa com o mesmo nome na folha, em grupos diferentes"
+    c = chave(cargo.split(" ou ")[0])
+    if "DIRIGENTE" in c or "COORDENADOR GERAL" in c:
+        return "Dirigente e coordenação geral"
+    if "SUPERVISOR" in c:
+        return "Supervisores de ensino"
+    if re.search(r"CCESP|FCESP|CHEFE|ASSESSOR", c):
+        return "Chefias e assessores (cargos em comissão e funções de confiança)"
+    if "DIRETOR" in c or "VICE" in c:
+        return "Diretores e vice-diretores de escola"
+    if "COORDENADOR" in c:
+        return "Professores coordenadores"
+    if "PROF" in c:
+        return "Professores"
+    if re.search(r"AGENTE|OFICIAL|EXECUTIVO|ANALISTA|SECRETARIO|ASSISTENTE|AUXILIAR", c):
+        return "Pessoal administrativo e de apoio"
+    return "Outros cargos"
+
+
+def agrupar_cargos(valor_por_cargo, pessoas_por_cargo):
+    grupos = collections.defaultdict(lambda: [0.0, set(), []])
+    for cargo, v in valor_por_cargo.items():
+        g = grupos[grupo_cargo(cargo)]
+        g[0] += v
+        g[1] |= pessoas_por_cargo[cargo]
+        g[2].append([cargo, round(v, 2), len(pessoas_por_cargo[cargo])])
+    return [[nome, round(v, 2), len(p), sorted(det, key=lambda d: -d[1])]
+            for nome, (v, p, det) in sorted(grupos.items(), key=lambda kv: -kv[1][0])]
+
+
 def inciso(amparo):
     m = re.search(r"Art\.\s*75,\s*(II|I)\b", amparo or "")
     return m.group(1) if m else None
@@ -93,7 +145,7 @@ def montar():
                 if x.get("pessoa"):
                     if "diaria" in chave(x["natureza"]).lower():
                         dia_mes[x["data"][:7]] += x["valor"]
-                        cargo = x.get("cargo") or "Cargo não identificado (nome repetido ou fora da folha)"
+                        cargo = cargo_da_diaria(x.get("cargo"))
                         dia_cargo[cargo] += x["valor"]
                         pessoas.add(x["pessoa_id"])
                         pessoas_cargo[cargo].add(x["pessoa_id"])
@@ -107,7 +159,8 @@ def montar():
                 "credores": [[k, round(v, 2)] for k, v in credores.most_common(25)],
                 "diarias": {"total": round(sum(dia_mes.values()), 2), "pessoas": len(pessoas),
                             "por_mes": sorted([k, round(v, 2)] for k, v in dia_mes.items()),
-                            "por_cargo": [[k, round(v, 2), len(pessoas_cargo[k])] for k, v in dia_cargo.most_common()]},
+                            "por_cargo": [[k, round(v, 2), len(pessoas_cargo[k])] for k, v in dia_cargo.most_common()],
+                            "por_grupo": agrupar_cargos(dia_cargo, pessoas_cargo)},
             }
 
     # ---- equipe com folha e diarias

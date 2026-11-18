@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar Sem Limites · Bauru-SP · Diretoria de Ensino</title>
 <meta name="description" content="A administração da Diretoria de Ensino (URE) de Bauru: quem comanda, quanto recebe, quanto gasta e o que contrata, só com dados oficiais.">
@@ -182,7 +183,14 @@
       '<div class="tiles"><div class="tile"><b>' + reais(d.total) + "</b><span>em diárias</span></div>" +
       '<div class="tile"><b>' + fmt(d.pessoas) + "</b><span>pessoas receberam</span></div></div>" +
       "<h3>Por mês</h3>" + barras(d.por_mes.map(function (p) { return [mesAno(p[0]), p[1]]; })) +
-      '<h3 style="margin-top:14px">Por cargo de quem recebeu</h3>' + barras(d.por_cargo.slice(0, 12).map(function (p) { return [p[0].charAt(0) + p[0].slice(1).toLowerCase() + " (" + p[2] + (p[2] === 1 ? " pessoa)" : " pessoas)"), p[1]]; }));
+      '<h3 style="margin-top:14px">Por cargo de quem recebeu</h3>' +
+      '<p class="pequeno">Cargo pela folha de pagamento do Estado, ligando o nome de quem recebeu ao nome na folha (que vem abreviado). Toque num grupo para ver os cargos.</p>' +
+      barras((d.por_grupo || []).map(function (gr) { return [gr[0] + " (" + fmt(gr[2]) + (gr[2] === 1 ? " pessoa)" : " pessoas)"), gr[1]]; })) +
+      '<details style="margin-top:6px"><summary>Ver os cargos de cada grupo</summary>' +
+      (d.por_grupo || []).map(function (gr) {
+        return '<p class="rotulo" style="margin:12px 0 0">' + esc(gr[0]) + "</p>" +
+          barras(gr[3].map(function (p) { return [p[0].charAt(0) + p[0].slice(1).toLowerCase() + " (" + p[2] + (p[2] === 1 ? " pessoa)" : " pessoas)"), p[1]]; }));
+      }).join("") + "</details>";
     document.getElementById("corpoGastos").innerHTML =
       '<div class="tiles"><div class="tile"><b>' + reais(g.total) + "</b><span>pagos em " + esc(estado.ano) + " até " + MESES[g.ate_mes] + "</span></div>" +
       '<div class="tile"><b>' + fmt(g.pagamentos) + "</b><span>pagamentos</span></div></div>" +

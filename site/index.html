@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar Sem Limites · Bauru-SP</title>
 <meta name="description" content="O que cada vereador de Bauru faz, só com dados oficiais da Câmara Municipal.">
@@ -111,7 +112,9 @@
     '<section id="repetidos"><h2>O problema que não some</h2>' +
     '<p class="sub">Ruas que aparecem em 3 ou mais pedidos diferentes desde ' + br(R.legislatura.inicio) + ".</p>" +
     '<div class="aviso">Pedido repetido não prova que a Prefeitura ignorou o problema. Pode ser um problema novo no mesmo lugar, ou vereadores diferentes pedindo a mesma coisa.</div>' +
-    '<div id="listaRepetidos"></div></section>' +
+    '<div class="controles" style="grid-template-columns:2fr 1fr"><input class="busca" id="qRep" type="search" placeholder="Buscar rua, bairro, vereador ou assunto (ex.: buraco)" autocomplete="off">' +
+    '<select id="ordRep"><option value="n">Mais pedidos</option><option value="recente">Pedido mais recente</option></select></div>' +
+    '<div class="destaque" id="resRep"></div><div id="listaRepetidos"></div></section>' +
 
     '<section id="camara"><h2>O trabalho da Câmara</h2><p class="sub">Homenagem ou trabalho? Tudo o que os vereadores apresentaram nesta legislatura: <b class="num">' + fmt(totalMat) + "</b> propostas.</p>" +
     '<div class="barra">' + ordemGrupos.map(function (g) {
@@ -164,16 +167,33 @@
   var tB; qB.addEventListener("input", function () { clearTimeout(tB); tB = setTimeout(filtrarBairro, 200); });
   filtrarBairro();
 
-  // ---------- repetidos
-  paginada(document.getElementById("listaRepetidos"), R.repetidos, function (r) {
-    var ms = r.pedidos.map(function (c) { return porCod[c]; });
-    var autores = {}; ms.forEach(function (m) { m.autores.slice(0, 1).forEach(function (a) { autores[nome(a)] = 1; }); });
-    return '<li class="item"><h3>' + esc(r.rua) + ' <span class="pequeno num">— ' + r.pedidos.length + " pedidos</span></h3>" +
-      '<div class="meta">' + br(ms[0].data) + " a " + br(ms[ms.length - 1].data) + " · " + esc(Object.keys(autores).join(", ")) + "</div>" +
-      "<details><summary>Ver os pedidos</summary><ul>" + ms.map(function (m) {
+  // ---------- repetidos (com busca e ordenacao)
+  var repetidos = R.repetidos.map(function (r) {
+    var ms = r.pedidos.map(function (c) { return porCod[c]; }).filter(Boolean);
+    var autores = {}; ms.forEach(function (m) { m.autores.forEach(function (a) { autores[nome(a)] = 1; }); });
+    var bairros = {}; ms.forEach(function (m) { m.bairros.forEach(function (b) { bairros[b] = 1; }); });
+    return { rua: r.rua, ms: ms, autores: Object.keys(autores), bairros: Object.keys(bairros),
+             ultima: ms.length ? ms[ms.length - 1].data : "",
+             texto: norm(r.rua + " " + Object.keys(bairros).join(" ") + " " + Object.keys(autores).join(" ") + " " + ms.map(function (m) { return m.ementa; }).join(" ")) };
+  });
+  function itemRepetido(r) {
+    return '<li class="item"><h3>' + esc(r.rua) + ' <span class="pequeno num">— ' + r.ms.length + " pedidos</span></h3>" +
+      '<div class="meta">' + br(r.ms[0].data) + " a " + br(r.ultima) + (r.bairros.length ? " · " + esc(r.bairros.join(", ")) : "") + " · " + esc(r.autores.join(", ")) + "</div>" +
+      "<details><summary>Ver os pedidos</summary><ul>" + r.ms.map(function (m) {
         return '<li><a href="' + linkMateria(m.cod) + '" target="_blank" rel="noopener">' + esc(m.id) + "</a> (" + br(m.data) + "): " + esc(m.ementa) + "</li>";
       }).join("") + "</ul></details></li>";
-  }, 8);
+  }
+  function filtrarRep() {
+    var q = norm(document.getElementById("qRep").value.trim()), ord = document.getElementById("ordRep").value;
+    var lista = repetidos.filter(function (r) { return !q || r.texto.indexOf(q) >= 0; });
+    lista.sort(function (a, b) { return ord === "recente" ? (a.ultima < b.ultima ? 1 : -1) : b.ms.length - a.ms.length; });
+    document.getElementById("resRep").innerHTML = "<b class=\"num\">" + fmt(lista.length) + "</b> " + (lista.length === 1 ? "rua" : "ruas") +
+      (q ? " com pedidos repetidos que citam “" + esc(document.getElementById("qRep").value.trim()) + "”" : " com 3 ou mais pedidos");
+    paginada(document.getElementById("listaRepetidos"), lista, itemRepetido, 8);
+  }
+  var tR; document.getElementById("qRep").addEventListener("input", function () { clearTimeout(tR); tR = setTimeout(filtrarRep, 200); });
+  document.getElementById("ordRep").addEventListener("change", filtrarRep);
+  filtrarRep();
 
   // ---------- vereadores
   var fP = document.getElementById("fPartido");

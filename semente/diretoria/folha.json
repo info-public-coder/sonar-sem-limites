@@ -245,5 +245,40 @@
    "mediana": 2966.0,
    "n": 57
   }
- }
+ },
+ "nomes_procurados": [
+  "Alexandre Augusto Castro de Souza Freitas",
+  "Ana Paula Gutierres Oyama",
+  "Carla Maria de Lara Campos Dorini Angelici",
+  "Elisângela Francisco Radighieri",
+  "Gabriel Prochnou Vieira",
+  "Joice Maria de Luca Rodrigues",
+  "Ligia Aparecida Dorigo Roder",
+  "Luciana Silva de Mello",
+  "Michael Ribeiro",
+  "Nilcéia Maria Arantes Marteline",
+  "Reggis Miquéias Marcondes Rosa",
+  "Renata Souza Silva",
+  "Rosely Fátima Freitas Cezaretto",
+  "Silmara Ribeiro de Almeida Souza",
+  "Tatiana de Almeida Furlani"
+ ],
+ "cargos_sede": [
+  "AGENTEDEORGANIZACAOESCOLAR",
+  "ANALISTAADMINISTRATIVO",
+  "CCESP105CHEFEDESECAO",
+  "CCESP108CHEFEDESERVICO",
+  "CCESP201ASSISTENTEI",
+  "CCESP202ASSISTENTEII",
+  "DIRETORDEESCOLA",
+  "EXECUTIVOPUBLICO",
+  "FCESP105CHEFEDESECAO",
+  "FCESP114COORDENADORGERAL",
+  "OFICIALADMINISTRATIVO",
+  "PROFENSINOFUNDAMENTALMEDIO",
+  "PROFESSOREDUCACAOBASICAI",
+  "PROFESSOREDUCACAOBASICAII",
+  "SUPERVISORDEENSINO",
+  "SUPERVISOREDUCACIONAL"
+ ]
 }

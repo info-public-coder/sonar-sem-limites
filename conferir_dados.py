@@ -67,6 +67,16 @@ def dias(iso):
             return None
 
 
+def data_efetiva(info):
+    """(data usada para o prazo, texto extra). Se a fonte foi consultada depois
+    do ultimo download e nao tinha mudado ("verificada"), vale a verificacao;
+    o texto mostra as duas datas, para nao parecer coleta nova."""
+    baixada, conferida = info.get("ultima_boa"), info.get("verificada")
+    if conferida and (not baixada or conferida > baixada):
+        return conferida, f"; baixada em {str(baixada)[8:10]}/{str(baixada)[5:7]}, fonte sem mudança desde então" if baixada else ""
+    return baixada, ""
+
+
 class Relatorio:
     def __init__(self, anterior):
         self.itens = []
@@ -86,7 +96,8 @@ class Relatorio:
         elif d > limites[0]:
             self.add(pagina, fonte, "aviso", data, f"última coleta boa há {d} dias" + extra)
         else:
-            self.add(pagina, fonte, "ok", data, ("coletada hoje" if d == 0 else f"há {d} dia(s)") + extra)
+            verbo = "conferida" if "fonte sem mudança" in extra else "coletada"
+            self.add(pagina, fonte, "ok", data, (f"{verbo} hoje" if d == 0 else f"{verbo} há {d} dia(s)") + extra)
 
     def contagem(self, chave, valor):
         """Guarda a contagem e diz se caiu muito em relacao a ultima conferencia."""
@@ -133,7 +144,8 @@ def conferir():
         extra += f"; FALTAM os meses {buracos}"
     elif meses:
         extra += f"; janeiro a {meses[-1]:02d}/{corrente.get('ano')}"
-    r.prazo("Dinheiro", f"TCE-SP {ano} (pagamentos do mês)", tce.get("ultima_boa"), PRAZO_DIARIO, extra)
+    data, nota = data_efetiva(tce)
+    r.prazo("Dinheiro", f"TCE-SP {ano} (pagamentos do mês)", data, PRAZO_DIARIO, extra + nota)
     if buracos:
         r.itens[-1]["situacao"] = "falha"
     elif meses and meses[-1] < mes - 3:
@@ -149,7 +161,8 @@ def conferir():
         a = int(nome.rsplit("_", 1)[1])
         limites = PRAZO_DIARIO if a == ano else (15, 30)
         rotulo = "PNCP " + nome.split("_")[1].replace("contratos", "contratos").capitalize() + f" {a}"
-        r.prazo("Dinheiro", rotulo, info.get("ultima_boa"), limites,
+        data, nota = data_efetiva(info)
+        r.prazo("Dinheiro", rotulo, data, limites, nota +
                 r.contagem(nome, info.get("registros")) + f"; {info.get('registros')} registros")
     if f"pncp_contratos_{ano}" not in est:
         r.add("Dinheiro", f"PNCP Contratos {ano}", "falha", None, "nunca coletado com sucesso")
@@ -170,7 +183,8 @@ def conferir():
         # Servidores e pagamentos vem do portal da Secretaria, que recusa o GitHub:
         # so atualizam pelo computador local. O resto o robo coleta todo dia.
         local = chave in ("servidores", "pagamentos")
-        r.prazo("Diretoria de Ensino", rotulo, info.get("ultima_boa"), PRAZO_LOCAL if local else PRAZO_DIARIO,
+        data, nota = data_efetiva(info)
+        r.prazo("Diretoria de Ensino", rotulo, data, PRAZO_LOCAL if local else PRAZO_DIARIO, nota +
                 r.contagem("diretoria_" + chave, info.get("registros")) +
                 ("; só atualiza pelo computador local (o portal recusa o GitHub)" if local else ""))
     folha = ler_json(os.path.join(DADOS, "diretoria", "folha.json")) or {}

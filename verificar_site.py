@@ -68,11 +68,21 @@ def verificar(exe, pagina, esperados, tmp):
     moldura = pathlib.Path(tmp) / f"moldura_{pagina}"
     moldura.write_text(MOLDURA.format(url=(SITE / pagina).as_uri(), checagens=checagens), encoding="utf-8")
     extra = [] if sys.platform == "win32" else ["--no-sandbox"]   # exigido no Linux do GitHub
-    proc = subprocess.run(
-        [exe, "--headless=new", "--disable-gpu", "--allow-file-access-from-files", *extra,
-         "--disable-web-security", f"--user-data-dir={os.path.join(tmp, 'perfil')}", "--virtual-time-budget=8000",
-         "--enable-logging=stderr", "--v=0", "--dump-dom", moldura.as_uri()],
-        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+    proc = None
+    for tentativa in range(3):
+        # O navegador sem janela as vezes trava ao abrir; um travamento dele nao e
+        # erro da pagina, entao tenta de novo com um perfil limpo.
+        try:
+            proc = subprocess.run(
+                [exe, "--headless=new", "--disable-gpu", "--allow-file-access-from-files", *extra,
+                 "--disable-web-security", f"--user-data-dir={os.path.join(tmp, f'perfil{tentativa}')}",
+                 "--virtual-time-budget=8000", "--enable-logging=stderr", "--v=0", "--dump-dom", moldura.as_uri()],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+            break
+        except subprocess.TimeoutExpired:
+            print(f"  ({pagina}: navegador travou, tentando de novo)", flush=True)
+    if proc is None:
+        return ["o navegador travou 3 vezes ao abrir a pagina"], ""
     problemas = []
     for linha in proc.stderr.splitlines():
         if "CONSOLE" in linha and ("Uncaught" in linha or "Error" in linha):

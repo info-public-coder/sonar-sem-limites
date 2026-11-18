@@ -1,22 +1,25 @@
 {
  "equipe": {
-  "ultima_boa": "2026-11-18T13:38:16",
+  "ultima_boa": "2026-11-18T19:00:47",
   "registros": 15
  },
  "servidores": {
   "ultima_boa": "2026-11-18T14:20:03",
-  "registros": 123
+  "registros": 123,
+  "verificada": "2026-11-18T19:00:52"
  },
  "folha": {
-  "ultima_boa": "2026-11-18T17:08:33",
-  "registros": 13
+  "ultima_boa": "2026-11-18T18:53:55",
+  "registros": 13,
+  "verificada": "2026-11-18T19:00:52"
  },
  "pagamentos": {
-  "ultima_boa": "2026-11-18T17:08:33",
-  "registros": 5738
+  "ultima_boa": "2026-11-18T18:54:46",
+  "registros": 5738,
+  "verificada": "2026-11-18T19:00:57"
  },
  "pncp": {
-  "ultima_boa": "2026-11-18T13:56:05",
+  "ultima_boa": "2026-11-18T19:22:39",
   "registros": 38
  }
 }

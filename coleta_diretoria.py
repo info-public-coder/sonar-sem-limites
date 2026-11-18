@@ -352,7 +352,47 @@ def folha(equipe, cargos_sede):
     medianas = {k: {"mediana": round(statistics.median(v), 2), "n": len(v)}
                 for k, v in por_cargo.items() if k in cargos_sede and len(v) >= 3}
     return {"publicada_em": mes, "fonte": FOLHA_PAGINA, "linhas_seduc": n, "homonimos": duvidosos,
-            "equipe": linhas_equipe, "medianas": medianas}, cargo_por_nome
+            "equipe": linhas_equipe, "medianas": medianas,
+            "nomes_procurados": sorted(p["nome"] for p in equipe["pessoas"]),
+            "cargos_sede": sorted(cargos_sede)}, cargo_por_nome
+
+
+class SemMudanca(Exception):
+    """A fonte foi consultada e nao mudou: vale a versao anterior (dados)."""
+    def __init__(self, dados):
+        super().__init__("sem mudanca na fonte")
+        self.dados = dados
+
+
+def folha_sem_mudanca(equipe, cargos_sede):
+    """Versao anterior da folha, se o Estado nao publicou arquivo novo e a lista
+    de nomes da URE e os cargos da sede continuam os mesmos. Senao, None."""
+    anterior = ler("folha")
+    if not anterior:
+        return None
+    try:
+        publicada = mes_da_folha()
+    except Exception:  # noqa: BLE001
+        return None
+    if (anterior.get("publicada_em") == publicada
+            and anterior.get("nomes_procurados") == sorted(p["nome"] for p in equipe["pessoas"])
+            and set(cargos_sede) <= set(anterior.get("cargos_sede", []))):
+        return anterior
+    return None
+
+
+def versao_arquivo(url):
+    """Data e tamanho de um arquivo, sem baixar (cabecalho HTTP); para arquivo
+    local, tamanho e data de modificacao."""
+    if os.path.exists(url):
+        return f"{os.path.getsize(url)}|{int(os.path.getmtime(url))}"
+    r = subprocess.run(["curl", "-sSIL", "--max-time", "60", "-A", UA_NAVEGADOR, url], capture_output=True)
+    texto = r.stdout.decode("latin-1", errors="replace")
+    data = re.findall(r"(?im)^last-modified:\s*(.+?)\s*$", texto)
+    tam = re.findall(r"(?im)^content-length:\s*(\d+)", texto)
+    if r.returncode != 0 or not (data or tam):
+        raise RuntimeError(f"nao deu para consultar a versao de {url}")
+    return f"{tam[-1] if tam else '?'}|{data[-1] if data else '?'}"
 
 
 # ---------- 3. servidores da sede (cadastro anonimizado)
@@ -391,6 +431,9 @@ def ler_csv_seduc(url):
 
 def servidores_sede():
     url = ultimo_arquivo(CONJ_SERVIDORES, "Base Servidores Ativos")
+    anterior = ler("servidores")
+    if anterior and anterior.get("arquivo") == os.path.basename(url) and "sedes" in anterior:
+        raise SemMudanca(anterior)        # mesmo arquivo mensal ja processado
     por_cargo, quadro = collections.Counter(), collections.Counter()
     total_ure = sede = 0
     # De TODAS as URE: quantos trabalham na sede e com que codigo de unidade.
@@ -518,11 +561,20 @@ def cargo_do_credor(credor, cargo_por_nome, indice):
     return "|".join(sorted(cargos))
 
 
-def pagamentos(equipe, cargo_por_nome):
+def pagamentos(equipe, obter_mapa):
+    """obter_mapa() devolve o mapa nome->cargos da folha; so e chamado se os
+    arquivos de pagamento mudaram (evita baixar a folha a toa)."""
     urls = manuais(r"Pagamentos \d{4}.*\.zip")
     if not urls:
         achados = links_do_conjunto(CONJ_PAGAMENTOS, r"Pagamentos \d{4}.*\.zip")
         urls = achados if achados and isinstance(achados[0], str) else []
+    urls = [u for u in urls if int(re.search(r"Pagamentos (\d{4})", urllib.parse.unquote(u)).group(1)) >= ANO_INICIAL]
+    versoes = {os.path.basename(urllib.parse.unquote(u)): versao_arquivo(u) for u in urls}
+    nomes = sorted(p["nome"] for p in equipe["pessoas"])
+    anterior = ler("pagamentos")
+    if anterior and anterior.get("versoes") == versoes and anterior.get("nomes_equipe") == nomes:
+        raise SemMudanca(anterior)        # nenhum arquivo do portal mudou
+    cargo_por_nome = obter_mapa()
     nomes_equipe = {chave(p["nome"])[:30]: p["nome"] for p in equipe["pessoas"]}
     indice, cache_cargo = indice_folha(cargo_por_nome), {}
     por_ano = {}
@@ -587,7 +639,7 @@ def pagamentos(equipe, cargo_por_nome):
                              "pagamentos": linhas}
     if not por_ano:
         raise ValueError("nenhum arquivo de pagamentos encontrado")
-    return {"fonte": CONJ_PAGAMENTOS, "ug": UG, "anos": por_ano}
+    return {"fonte": CONJ_PAGAMENTOS, "ug": UG, "anos": por_ano, "versoes": versoes, "nomes_equipe": nomes}
 
 
 # ---------- 6. PNCP
@@ -621,16 +673,31 @@ def pncp_get(caminho, params):
         pagina += 1
 
 
+DIAS_ANO_FECHADO = 7   # ano encerrado: consulta o PNCP no maximo uma vez por semana
+
+
 def pncp():
     hoje = datetime.date.today()
     contratos, diretas = [], []
+    anterior = ler("pncp") or {}
+    consultas = dict(anterior.get("anos_consultados") or {})
+    limite = (datetime.datetime.now() - datetime.timedelta(days=DIAS_ANO_FECHADO)).isoformat()
     for ano in range(ANO_INICIAL, hoje.year + 1):
+        if (ano < hoje.year and consultas.get(str(ano), "") > limite and "--tudo" not in sys.argv
+                and any(c.get("ano_consulta") == ano for c in anterior.get("contratos", []))):
+            # ano encerrado consultado ha menos de uma semana: reaproveita
+            contratos += [c for c in anterior["contratos"] if c.get("ano_consulta") == ano]
+            diretas += [d for d in anterior.get("diretas", []) if d.get("ano_consulta") == ano]
+            print(f"    PNCP {ano}: ano encerrado, consultado ha menos de {DIAS_ANO_FECHADO} dias; reaproveitado")
+            continue
         ini, fim = f"{ano}0101", min(datetime.date(ano, 12, 31), hoje).strftime("%Y%m%d")
         base = {"dataInicial": ini, "dataFinal": fim, "codigoUnidadeAdministrativa": UG}
         for x in pncp_get("contratos", {**base, "cnpjOrgao": CNPJ_SEDUC}):
-            contratos.append({k: x.get(k) for k in ("numeroControlePNCP", "numeroControlePncpCompra", "niFornecedor",
-                                                    "nomeRazaoSocialFornecedor", "tipoPessoa", "valorGlobal",
-                                                    "objetoContrato", "dataAssinatura", "dataVigenciaFim")})
+            item = {k: x.get(k) for k in ("numeroControlePNCP", "numeroControlePncpCompra", "niFornecedor",
+                                          "nomeRazaoSocialFornecedor", "tipoPessoa", "valorGlobal",
+                                          "objetoContrato", "dataAssinatura", "dataVigenciaFim")}
+            item["ano_consulta"] = ano
+            contratos.append(item)
         for cod, nome in ((8, "Dispensa"), (9, "Inexigibilidade")):
             for x in pncp_get("contratacoes/publicacao", {**base, "codigoModalidadeContratacao": cod,
                                                          "cnpj": CNPJ_SEDUC}):
@@ -638,11 +705,15 @@ def pncp():
                                 "amparo": (x.get("amparoLegal") or {}).get("nome"),
                                 "valor": x.get("valorTotalHomologado") or x.get("valorTotalEstimado"),
                                 "objeto": x.get("objetoCompra"), "data": (x.get("dataPublicacaoPncp") or "")[:10],
-                                "situacao": x.get("situacaoCompraNome")})
+                                "situacao": x.get("situacaoCompraNome"), "ano_consulta": ano})
+        consultas[str(ano)] = datetime.datetime.now().isoformat(timespec="seconds")
     # Compra de origem de cada contrato (modalidade e amparo legal), inclusive de
     # anos anteriores a 2025: sem isso nao da para dizer como o contrato foi feito.
     ja = {d["numeroControlePNCP"] for d in diretas}
-    compras = {}
+    # Modalidade e amparo de uma compra nao mudam depois de publicados: reaproveita
+    # as ja consultadas e so pergunta ao PNCP pelas novas.
+    compras = {k: v for k, v in ((ler("pncp") or {}).get("compras_origem") or {}).items() if v.get("modalidade")}
+    ja |= set(compras)
     for ctrl in sorted({c["numeroControlePncpCompra"] for c in contratos if c.get("numeroControlePncpCompra")} - ja):
         m = re.match(r"(\d{14})-\d-(\d+)/(\d{4})", ctrl)
         if not m:
@@ -669,7 +740,7 @@ def pncp():
         if x["tipoPessoa"] == "PF":
             x["niFornecedor"] = None       # CPF nunca e salvo
     return {"fonte": "https://pncp.gov.br/app/", "ug": UG, "contratos": contratos, "diretas": diretas,
-            "compras_origem": compras}
+            "compras_origem": compras, "anos_consultados": consultas}
 
 
 # ---------- principal
@@ -681,6 +752,11 @@ def main():
         print(f"  {nome} ...", flush=True)
         try:
             dados = funcao()
+        except SemMudanca as sem:
+            # Consultada e igual: mantem a versao anterior e registra so a verificacao.
+            print("    sem mudanca na fonte; mantida a versao anterior")
+            estado.verificar(PASTA, nome)
+            return sem.dados
         except Exception as erro:  # noqa: BLE001
             print(f"    FALHOU: {erro} (mantida a versao anterior)", file=sys.stderr)
             falhas.append(nome)
@@ -692,25 +768,36 @@ def main():
     print("URE Bauru - coletando")
     equipe = etapa("equipe", equipe_ure)
     sede = etapa("servidores", servidores_sede)
-    cargo_por_nome = {}
-    if equipe and sede:
-        cargos = {c[2] for c in sede["por_cargo"]}
-        guardado = {}
+    mapa = {}                       # nome->cargos da folha (so existe se a folha foi baixada)
 
-        def _folha():
-            dados, mapa = folha(equipe, cargos)
-            guardado["mapa"] = mapa
-            return dados
-        etapa("folha", _folha)
-        cargo_por_nome = guardado.get("mapa", {})
+    def baixar_folha():
+        dados, m = folha(equipe, {c[2] for c in sede["por_cargo"]})
+        mapa["valor"] = m
+        return dados
+
+    def obter_mapa():
+        if "valor" not in mapa:     # folha nao mudou, mas os pagamentos sim: baixa a folha agora
+            print("  folha (para ligar diarias a cargos) ...", flush=True)
+            dados = baixar_folha()
+            gravar("folha", dados)
+            estado.registrar(PASTA, "folha", quantidade("folha", dados))
+        return mapa["valor"]
+
+    if equipe and sede:
+        def etapa_folha():
+            anterior = folha_sem_mudanca(equipe, {c[2] for c in sede["por_cargo"]})
+            if anterior:
+                raise SemMudanca(anterior)
+            return baixar_folha()
+        etapa("folha", etapa_folha)
     # Ausencias: NAO coletadas. O boletim de frequencia quase nao registra a equipe
     # das sedes (09/2026: 1 servidor com ausencia entre 123 na sede de Bauru;
     # so 38 das 93 sedes aparecem). Mostrar isso sugeriria uma equipe que nunca
     # falta. A funcao ausencias() fica para quando o dado melhorar.
-    if equipe and cargo_por_nome:
-        etapa("pagamentos", lambda: pagamentos(equipe, cargo_por_nome))
+    if equipe and sede:
+        etapa("pagamentos", lambda: pagamentos(equipe, obter_mapa))
     else:
-        print("  pagamentos: pulado (precisa da equipe e da folha nesta rodada)")
+        print("  pagamentos: pulado (precisa da equipe e dos servidores)")
         falhas.append("pagamentos")
     etapa("pncp", pncp)
     gravar("coleta", {"fim": datetime.datetime.now().isoformat(timespec="seconds"), "falhas": falhas})

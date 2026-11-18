@@ -62,6 +62,13 @@ Dois robôs em `.github/workflows/`:
 - `conferir_dados.py` roda no fim. Fonte que passou do prazo (Câmara 4 dias, TCE e PNCP 7, Prefeitura e
   servidores/pagamentos da URE 45, que dependem do computador local) deixa a execução **vermelha** e o
   GitHub manda e-mail; o site é publicado assim mesmo, com a data de cada fonte em "Situação dos dados".
+- **Coleta incremental**: só baixa o que pode ter mudado. TCE do ano corrente: reaproveita os meses
+  antigos e baixa de novo os 3 últimos e os novos. PNCP de ano encerrado: no máximo uma vez por
+  semana. Folha do Estado, cadastro de servidores e pagamentos da URE: só se a fonte publicou arquivo
+  novo (data ou tamanho mudou). Arquivo anual do TCE e fotos do TSE: só se faltarem. Câmara: sempre
+  completa (é rápida e o SAPL corrige presenças e votos depois). `--tudo` força baixar tudo de novo
+  (`coleta_gastos.py --tudo`, `coleta_diretoria.py --tudo`). O que foi conferido sem mudança aparece
+  em "Situação dos dados" como "conferida", com a data real do último download.
 - `publicar.yml` ("Publicar agora") publica a pasta `site/` como está no repositório, em ~1 minuto.
 
 ## Arquivos

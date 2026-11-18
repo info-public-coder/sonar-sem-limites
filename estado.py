@@ -29,6 +29,21 @@ def registrar(pasta, fonte, registros):
     os.replace(caminho + ".parcial", caminho)
 
 
+def verificar(pasta, fonte):
+    """A fonte foi consultada e NAO mudou desde a ultima coleta (mesmo arquivo,
+    mesma data de publicacao). Nao altera "ultima_boa" (data real do download):
+    so grava "verificada", para o conferir_dados.py nao acusar dado velho."""
+    caminho = os.path.join(pasta, "estado.json")
+    estado = ler(pasta)
+    item = estado.get(fonte, {})
+    item["verificada"] = datetime.datetime.now().isoformat(timespec="seconds")
+    estado[fonte] = item
+    os.makedirs(pasta, exist_ok=True)
+    with open(caminho + ".parcial", "w", encoding="utf-8") as arq:
+        json.dump(estado, arq, ensure_ascii=False, indent=1)
+    os.replace(caminho + ".parcial", caminho)
+
+
 def ler(pasta):
     caminho = os.path.join(pasta, "estado.json")
     if not os.path.exists(caminho):

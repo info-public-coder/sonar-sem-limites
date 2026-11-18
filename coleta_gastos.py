@@ -13,6 +13,11 @@ confere contagens, e so troca dados/gastos/ se tudo der certo.
 Uso:
     python coleta_gastos.py             tudo
     python coleta_gastos.py --ano 2026  so o PNCP desse ano (e o TCE do ano corrente)
+    python coleta_gastos.py --tudo      baixa tudo de novo, sem reaproveitar nada
+
+Incremental: o TCE do ano corrente reaproveita os meses antigos e baixa de novo
+os 3 ultimos e os novos; o PNCP de ano ja encerrado e baixado no maximo uma vez
+por semana. O que e reaproveitado nao conta como coleta nova no conferir_dados.py.
 """
 
 import datetime
@@ -62,10 +67,47 @@ def baixar(url, tentativas=5, timeout=120):
     raise RuntimeError(f"falhou: {url}: {ultimo}")
 
 
-def tce_ano_corrente(tipo, ano):
-    """Baixa mes a mes ate o primeiro mes vazio. Devolve {mes: registros}."""
-    meses = {}
-    for mes in range(1, 13):
+def ano_fechado_recente(est, ano):
+    """True se os tres arquivos do PNCP desse ano existem e foram coletados ha
+    menos de DIAS_ANO_FECHADO dias."""
+    limite = datetime.datetime.now() - datetime.timedelta(days=DIAS_ANO_FECHADO)
+    for nome in (f"pncp_contratos_{ano}", f"pncp_dispensa_{ano}", f"pncp_inexigibilidade_{ano}"):
+        info = est.get(nome)
+        if not info or not os.path.exists(os.path.join(PASTA, nome + ".json")):
+            return False
+        try:
+            if datetime.datetime.fromisoformat(info["ultima_boa"]) < limite:
+                return False
+        except (KeyError, ValueError):
+            return False
+    return True
+
+
+REBAIXAR_MESES = 3     # o TCE as vezes corrige os ultimos meses: estes sempre vem de novo
+DIAS_ANO_FECHADO = 7    # PNCP de ano ja encerrado: uma vez por semana (contrato publicado com atraso)
+
+
+def tce_ano_corrente(tipo, ano, tudo=False):
+    """Baixa mes a mes ate o primeiro mes vazio. Devolve {mes: registros}.
+    Incremental: reaproveita do arquivo anterior os meses antigos do mesmo ano e
+    baixa de novo so os REBAIXAR_MESES ultimos e os meses novos."""
+    meses, inicio = {}, 1
+    anterior = os.path.join(PASTA, f"{tipo if tipo != 'despesas' else 'tce_despesas'}_ano_corrente.json")
+    if not tudo and os.path.exists(anterior):
+        try:
+            with open(anterior, encoding="utf-8") as arq:
+                velho = json.load(arq)
+        except (OSError, ValueError):
+            velho = {}
+        if velho.get("ano") == ano and velho.get("meses"):
+            guardados = sorted(int(m) for m in velho["meses"])
+            # so reaproveita se nao houver buraco (meses 1..N todos presentes)
+            if guardados == list(range(1, guardados[-1] + 1)):
+                inicio = max(1, guardados[-1] - REBAIXAR_MESES + 1)
+                meses = {m: velho["meses"][str(m)] for m in guardados if m < inicio}
+                if meses:
+                    print(f"  TCE {tipo} {ano}: meses 01 a {inicio - 1:02d} reaproveitados da coleta anterior")
+    for mes in range(inicio, 13):
         print(f"  TCE {tipo} {ano}/{mes:02d} ...", end=" ", flush=True)
         try:
             dados = baixar(TCE.format(tipo=tipo, ano=ano, mes=mes))
@@ -130,14 +172,19 @@ def main():
         estado.registrar(PASTA, nome, registros[nome])
         print(f"  gravado {nome}: {registros[nome]} registros")
 
+    tudo = "--tudo" in sys.argv
     etapa("tce_despesas_ano_corrente",
-          lambda: {"ano": hoje.year, "meses": tce_ano_corrente("despesas", hoje.year)},
+          lambda: {"ano": hoje.year, "meses": tce_ano_corrente("despesas", hoje.year, tudo)},
           lambda d: bool(d["meses"]))
 
     anos = range(ANO_INICIAL, hoje.year + 1)
     if "--ano" in sys.argv:
         anos = [int(sys.argv[sys.argv.index("--ano") + 1])]
+    est = estado.ler(PASTA)
     for ano in anos:
+        if ano < hoje.year and not tudo and ano_fechado_recente(est, ano):
+            print(f"  PNCP {ano}: ano encerrado, coletado ha menos de {DIAS_ANO_FECHADO} dias; mantido (use --tudo para forcar)")
+            continue
         ini, fim = f"{ano}0101", min(datetime.date(ano, 12, 31), hoje).strftime("%Y%m%d")
         print(f"  PNCP contratos {ano} ...", end=" ", flush=True)
         etapa(f"pncp_contratos_{ano}",

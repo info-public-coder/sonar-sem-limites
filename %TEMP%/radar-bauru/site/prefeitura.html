@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Sem Limites · Bauru-SP · Prefeitura</title>
+<meta name="description" content="A Prefeita, o vice e os secretários de Bauru, só com dados oficiais.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header>
+  <div class="topo">
+    <span class="marca">RADAR SEM LIMITES <span class="cidade">Bauru-SP</span></span>
+    <span class="vivo" id="vivo"><i></i><span>carregando…</span></span>
+  </div>
+  <nav class="menu"><a href="index.html">Câmara</a><a href="prefeitura.html" aria-current="page">Prefeitura</a><a href="dinheiro.html">Dinheiro</a><a href="diretoria.html">Diretoria de Ensino</a></nav>
+  <h1>Quem governa Bauru</h1>
+  <p class="sub" style="margin-top:8px">A Prefeita, o vice e os secretários: o que a Prefeita enviou à Câmara e quanto foi pago em cada área, só com dados oficiais.</p>
+</header>
+
+<main id="app">
+  <noscript><p>Este site precisa de JavaScript para mostrar os dados.</p></noscript>
+</main>
+
+<footer>
+  <p><b>Radar Sem Limites · Bauru-SP</b>: projeto independente, sem vínculo com a Câmara Municipal, a Prefeitura ou partidos.
+  Nomes, cargos e fotos vêm da página oficial da Prefeitura; propostas, do sistema da Câmara (SAPL); valores, do Tribunal de Contas do Estado (TCE-SP).</p>
+  <p>Achou um erro? Ele será corrigido. Confira sempre na fonte oficial.</p>
+</footer>
+
+<script src="prefeitura.js"></script>
+<script>
+(function () {
+  "use strict";
+  var P = window.PREFEITURA;
+  var app = document.getElementById("app");
+  if (!P) {
+    app.innerHTML = '<section><p class="vazio">Os dados ainda não foram gerados. Rode <code>python coleta_prefeitura.py</code> e depois <code>python gerar_prefeitura.py</code>.</p></section>';
+    return;
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function norm(s) { return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function br(d) { if (!d) return "—"; var p = d.slice(0, 10).split("-"); return p[2] + "/" + p[1] + "/" + p[0]; }
+  function fmt(n) { return Number(n).toLocaleString("pt-BR"); }
+  function mi(v) { return "R$ " + (v / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " mi"; }
+  function reais(v) { return v >= 1e6 ? mi(v) : "R$ " + Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function linkMateria(cod) { return P.sapl + "/consultas/materia/materia_mostrar_proc?cod_materia=" + btoa(String(cod)); }
+  function iniciais(n) { var p = String(n).replace(/\(.*?\)/g, "").trim().split(/\s+/); return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase(); }
+  function foto(p) { return p.foto ? '<img class="foto" src="fotos/pref-' + esc(p.id) + '.jpg" alt="Foto de ' + esc(p.nome) + '" loading="lazy">' : '<div class="foto" aria-hidden="true">' + esc(iniciais(p.nome)) + "</div>"; }
+  var CORES = { lei: "var(--g-lei)", homenagem: "var(--g-homenagem)", utilidade: "var(--g-utilidade)", outros: "var(--g-outros)", veto: "var(--g-cobranca)", bairro: "var(--g-bairro)", cobranca: "var(--g-cobranca)", audiencia: "var(--g-audiencia)" };
+  var ORDEM = ["lei", "veto", "homenagem", "utilidade", "outros"];
+
+  document.querySelector("#vivo span").textContent = "Dados de " + br(P.gerado_em);
+  var pessoas = P.pessoas;
+  var prefeita = pessoas.filter(function (p) { return p.tipo === "prefeita"; })[0];
+  var vice = pessoas.filter(function (p) { return p.tipo === "vice"; })[0];
+  var secretarias = pessoas.filter(function (p) { return p.tipo === "secretaria"; });
+  var indiretas = pessoas.filter(function (p) { return p.tipo === "indireta"; });
+
+  function contato(p) {
+    return (p.fones.length ? '<div class="pequeno">Telefone: ' + esc(p.fones.join(" · ")) + "</div>" : "") +
+      (p.endereco ? '<div class="pequeno">' + esc(p.endereco) + "</div>" : "");
+  }
+  function curriculo(p) {
+    if (!p.curriculo || p.curriculo.length < 20) return "";
+    return "<details><summary>Currículo publicado pela Prefeitura</summary><p class=\"pequeno\" style=\"margin:6px 0 0;white-space:pre-line\">" + esc(p.curriculo) + "</p></details>";
+  }
+  function cabeca(p, cargo, pilulas) {
+    return '<div class="faixa"><div class="id">' + foto(p) + "<div><h3>" + esc(p.nome) + '</h3><div class="cargo">' + esc(cargo) + "</div></div></div>" +
+      (pilulas ? '<div class="pilulas">' + pilulas + "</div>" : "") + "</div>";
+  }
+
+  // ---------- Prefeita
+  var props = P.propostas, porGrupo = {};
+  props.forEach(function (m) { porGrupo[m.grupo] = (porGrupo[m.grupo] || 0) + 1; });
+  var votadas = props.filter(function (m) { return m.votada; }).length;
+  var vetos = props.filter(function (m) { return m.grupo === "veto"; });
+  function cartaoPrefeita(p) {
+    var pilha = ORDEM.map(function (g) { return porGrupo[g] ? '<i style="flex:' + porGrupo[g] + ' 1 0;background:' + CORES[g] + '" title="' + esc(P.grupos[g]) + ": " + porGrupo[g] + '"></i>' : ""; }).join("");
+    var linhas = ORDEM.filter(function (g) { return porGrupo[g]; }).map(function (g) { return '<li><i style="background:' + CORES[g] + '"></i><span>' + esc(P.grupos[g]) + "</span><b>" + fmt(porGrupo[g]) + "</b></li>"; }).join("");
+    return '<article class="cracha">' + cabeca(p, "Prefeita de Bauru", '<span class="pilula">Mandato 2025–2028</span>') +
+      '<div class="corpo">' +
+      '<div class="mini"><div><b>' + (P.tce ? mi(P.tce.prefeitura) : "—") + "</b><span>pagos pela Prefeitura em " + (P.tce ? P.tce.ano : "—") + ' (<a href="dinheiro.html">detalhes</a>)</span></div>' +
+      (P.tce_corrente ? "<div><b>" + mi(P.tce_corrente.prefeitura) + "</b><span>pagos em " + P.tce_corrente.ano + " até " + ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"][P.tce_corrente.ate_mes] + "</span></div>" : "") + "</div>" +
+      '<div><p class="rotulo">Propostas enviadas à Câmara: ' + fmt(props.length) + '</p><div class="pilha" aria-hidden="true">' + pilha + '</div><ul class="linhas num">' + linhas + "</ul></div>" +
+      '<div><p class="rotulo">Na Câmara</p><div class="votos2"><div><b>' + fmt(votadas) + "</b><span>já foram a votação no plenário</span></div>" +
+      '<div style="background:var(--fundo2)"><b>' + fmt(props.length - votadas) + "</b><span>sem votação registrada ainda</span></div></div>" +
+      '<p class="pequeno" style="margin:6px 0 0">' + fmt(P.cobrancas_vereadores) + ' pedidos de informação e cobranças foram feitos pelos vereadores nesta legislatura (<a href="index.html">ver na página da Câmara</a>).</p></div>' +
+      (vetos.length ? "<details><summary>Ver os " + vetos.length + " vetos</summary><ul>" + vetos.map(function (m) { return '<li><a href="' + linkMateria(m.cod) + '" target="_blank" rel="noopener">' + esc(m.id) + "</a> (" + br(m.data) + "): " + esc(m.ementa) + "</li>"; }).join("") + "</ul></details>" : "") +
+      "<details><summary>Ver as " + fmt(props.length) + ' propostas</summary><ul id="listaProps"></ul></details>' +
+      contato(p) +
+      '<p class="pe"><a href="' + esc(P.equipe_fonte) + '" target="_blank" rel="noopener">Página oficial da equipe de governo ↗</a></p>' +
+      "</div></article>";
+  }
+  function cartaoVice(p) {
+    return '<article class="cracha">' + cabeca(p, "Vice-Prefeito", "") +
+      '<div class="corpo">' + curriculo(p) + contato(p) +
+      '<p class="pequeno" style="margin:0">O vice não envia propostas à Câmara com o próprio nome; elas saem como da Prefeita.</p>' +
+      '<p class="pe"><a href="' + esc(P.equipe_fonte) + '" target="_blank" rel="noopener">Página oficial da equipe de governo ↗</a></p></div></article>';
+  }
+
+  // ---------- secretarias
+  var maior = Math.max.apply(null, secretarias.map(function (p) { return p.gasto ? p.gasto.total : 0; }).concat([1]));
+  function cartaoSecretaria(p) {
+    var g = p.gasto, corpo;
+    if (g) {
+      corpo = '<div><p class="rotulo">Pago em ' + g.ano + " nos programas desta área</p>" +
+        '<div class="mini" style="grid-template-columns:1fr"><div><b>' + mi(g.total) + "</b><span>" + g.programas.length + (g.programas.length === 1 ? " programa do orçamento" : " programas do orçamento") + "</span></div></div>" +
+        '<div class="trilho-s"><i style="width:' + Math.max(1, g.total / maior * 100) + '%"></i></div>' +
+        '<ul class="barras">' + g.programas.map(function (x) { return '<li><span class="nome-prog">' + esc(x[0]) + '</span><span class="valor">' + mi(x[1]) + "</span></li>"; }).join("") + "</ul>" +
+        (g.fornecedores.length ? "<details><summary>Quem mais recebeu nesses programas</summary><ul>" + g.fornecedores.map(function (f) { return "<li>" + esc(f.nome) + (f.pf ? ' <span class="tag">pessoa física</span>' : "") + ": " + reais(f.pago) + "</li>"; }).join("") + "</ul></details>" : "") +
+        "</div>";
+    } else if (p.orgao_pago) {
+      corpo = '<div><p class="rotulo">Pago em ' + p.orgao_pago.ano + "</p>" +
+        '<div class="mini" style="grid-template-columns:1fr"><div><b>' + mi(p.orgao_pago.total) + "</b><span>contabilidade própria no TCE-SP (" + esc(p.orgao_pago.orgao) + ', <a href="dinheiro.html">detalhes</a>)</span></div></div></div>';
+    } else {
+      corpo = "";
+    }
+    return '<article class="cracha" data-busca="' + esc(norm(p.nome + " " + p.cargo)) + '">' + cabeca(p, p.cargo, "") +
+      '<div class="corpo">' + corpo + curriculo(p) + contato(p) +
+      '<p class="pe">' + (p.pagina ? '<a href="' + esc(p.pagina) + '" target="_blank" rel="noopener">Página da secretaria ↗</a> · ' : "") +
+      '<a href="' + esc(P.equipe_fonte) + '" target="_blank" rel="noopener">Equipe de governo ↗</a></p></div></article>';
+  }
+
+  var saude = secretarias.some(function (p) { return norm(p.cargo).indexOf("saude") >= 0; });
+  app.innerHTML =
+    '<section id="prefeita"><h2>A Prefeita e o vice</h2><p class="sub">Eleitos juntos para 2025–2028.</p><div class="grade">' +
+    (prefeita ? cartaoPrefeita(prefeita) : "") + (vice ? cartaoVice(vice) : "") + "</div></section>" +
+    '<section id="secretarias"><h2>Gabinete e secretarias</h2>' +
+    '<p class="sub">Como a Prefeitura publica na página oficial. O valor de cada área vem do Tribunal de Contas (TCE-SP).</p>' +
+    (saude ? "" : '<div class="aviso">A Secretaria de Saúde não aparece na página oficial da equipe de governo (consultada em ' + br(P.equipe_coletada) + "). Por isso não há crachá de Saúde aqui. Em " + (P.tce ? P.tce.ano : "") + ", os programas de saúde receberam a maior fatia depois da Educação: veja na página Dinheiro.</div>") +
+    '<input class="busca" id="qSec" type="search" placeholder="Buscar secretaria ou nome" aria-label="Buscar secretaria ou nome" style="margin-bottom:14px">' +
+    '<div class="grade" id="gradeSec">' + secretarias.map(cartaoSecretaria).join("") + "</div></section>" +
+    '<section id="indiretas"><h2>Autarquias, empresas e fundo social</h2><p class="sub">Órgãos da administração da cidade com direção própria.</p><div class="grade">' +
+    indiretas.map(cartaoSecretaria).join("") + "</div></section>" +
+    '<section class="transp"><h2>De onde vêm os números</h2><dl>' +
+    '<dt>Nomes, cargos e fotos</dt><dd>Página oficial <a href="' + esc(P.equipe_fonte) + '" target="_blank" rel="noopener">Equipe de Governo</a> da Prefeitura, consultada em ' + br(P.equipe_coletada) + ". Se alguém mudar de cargo, a página muda na atualização seguinte.</dd>" +
+    "<dt>Propostas da Prefeita</dt><dd>Matérias com autoria \"Prefeita Municipal\" no sistema da Câmara (SAPL), coletadas em " + br(P.camara_coleta) + ". \"Já foram a votação\" quer dizer que existe registro de votação no plenário; o resultado de cada votação está na página da matéria.</dd>" +
+    "<dt>Quanto foi pago em cada área</dt><dd>O TCE-SP informa o <b>programa do orçamento</b> de cada pagamento, mas <b>não a secretaria</b>. Ligamos uma secretaria a um programa só quando o nome do programa é claramente o tema dela (ex.: \"Gestão do Esporte e Lazer\" → Esportes e Lazer). Essa ligação é conta nossa; secretarias sem programa com o nome da área aparecem sem valor. O detalhe por programa sai quando o TCE-SP fecha o ano. " +
+    (P.tce ? "Parte do dinheiro fica em programas que não dizem a área: só \"Gestão participativa e eficiente\" somou " + mi(P.tce.generico) + " em " + P.tce.ano + ". Por isso o valor de cada secretaria pode ser <b>menor</b> que o gasto real dela." : "") + "</dd>" +
+    "</dl></section>";
+
+  document.getElementById("listaProps").innerHTML = props.map(function (m) {
+    return '<li><a href="' + linkMateria(m.cod) + '" target="_blank" rel="noopener">' + esc(m.id) + "</a> (" + br(m.data) + "): " + esc(m.ementa) + "</li>";
+  }).join("");
+  document.getElementById("qSec").addEventListener("input", function () {
+    var q = norm(this.value);
+    Array.prototype.forEach.call(document.querySelectorAll("#gradeSec .cracha"), function (c) { c.hidden = q && c.getAttribute("data-busca").indexOf(q) < 0; });
+  });
+})();
+</script>
+</body>
+</html>

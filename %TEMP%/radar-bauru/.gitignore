@@ -1,0 +1,11 @@
+dados/*.json
+dados/*.parcial
+dados/tce/
+dados/gastos/
+dados/gastos.nova/
+dados.nova/
+__pycache__/
+.venv/
+dados/diretoria/
+dados/
+manual/

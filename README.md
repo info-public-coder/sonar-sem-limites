@@ -1,4 +1,6 @@
-# Radar Sem Limites · Bauru-SP
+# Sonar Sem Limites · Bauru-SP
+
+O nome é um trocadilho com os alagamentos da cidade: o mascote, o Bauruzinho, navega de submarino.
 
 Site independente que mostra, só com dados oficiais, o que fazem os 21 vereadores
 de Bauru-SP e para onde vai o dinheiro público da cidade.

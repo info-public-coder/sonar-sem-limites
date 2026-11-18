@@ -237,3 +237,10 @@
   @media (forced-colors: active) { .pilha i, .barra span, .barras .trilho i, .legenda i, .linhas li i { forced-color-adjust: none; } }
   .controles-2 { grid-template-columns: 1fr; }
   @media (min-width: 560px) { .controles .controles-2, .controles.controles-2 { grid-template-columns: 2fr 1fr; } }
+
+  /* marca com o logo (Bauruzinho no submarino) */
+  .marca { display: inline-flex; align-items: center; gap: 10px; color: var(--tinta); text-decoration: none; }
+  .marca:hover { color: var(--tinta); text-decoration: none; }
+  .marca > span { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 0; line-height: 1.2; }
+  .marca .logo { width: 56px; height: 56px; flex: none; border-radius: 50%; }
+  @media (min-width: 560px) { .marca .logo { width: 64px; height: 64px; } }

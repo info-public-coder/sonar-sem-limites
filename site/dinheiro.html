@@ -7,6 +7,7 @@
 <title>Radar Sem Limites · Bauru-SP · Dinheiro</title>
 <meta name="description" content="Para onde vai o dinheiro público de Bauru, só com dados oficiais do Tribunal de Contas e do Portal Nacional de Contratações.">
 <link rel="stylesheet" href="estilo.css">
+<script src="tema.js"></script>
 </head>
 <body>
 <header>
@@ -67,8 +68,9 @@
     if (!itens.length) { el.innerHTML = '<p class="vazio">Nada encontrado.</p>'; return; }
     el.appendChild(ul); el.appendChild(btn);
     function mais() {
-      ul.insertAdjacentHTML("beforeend", itens.slice(mostrados, mostrados + passo).map(render).join(""));
-      mostrados += passo; btn.hidden = mostrados >= itens.length;
+      var n = mostrados ? passo : 3;             // 3 itens de inicio; depois "passo" por clique
+      ul.insertAdjacentHTML("beforeend", itens.slice(mostrados, mostrados + n).map(render).join(""));
+      mostrados += n; btn.hidden = mostrados >= itens.length;
       btn.textContent = "Mostrar mais (" + (itens.length - mostrados).toLocaleString("pt-BR") + " restantes)";
     }
     btn.onclick = mais; mais();

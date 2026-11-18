@@ -7,6 +7,7 @@
 <title>Radar Sem Limites · Bauru-SP</title>
 <meta name="description" content="O que cada vereador de Bauru faz, só com dados oficiais da Câmara Municipal.">
 <link rel="stylesheet" href="estilo.css">
+<script src="tema.js"></script>
 </head>
 <body>
 <header>
@@ -59,14 +60,16 @@
       "<span>" + br(m.data) + (m.data > HOJE ? " (sessão agendada)" : "") + "</span><span>" + esc(autores || "autoria não registrada") + "</span></div>" +
       "<p>" + esc(m.ementa) + "</p>" + locais + "</li>";
   }
+  var INICIAIS = 3;
   function paginada(el, itens, render, passo) {
     var mostrados = 0;
     var ul = document.createElement("ul"); ul.className = "lista";
     var btn = document.createElement("button"); btn.className = "mais"; btn.type = "button";
     el.innerHTML = ""; el.appendChild(ul); el.appendChild(btn);
     function mais() {
-      ul.insertAdjacentHTML("beforeend", itens.slice(mostrados, mostrados + passo).map(render).join(""));
-      mostrados += passo;
+      var n = mostrados ? passo : INICIAIS;      // 3 itens de inicio; depois "passo" por clique
+      ul.insertAdjacentHTML("beforeend", itens.slice(mostrados, mostrados + n).map(render).join(""));
+      mostrados += n;
       btn.hidden = mostrados >= itens.length;
       btn.textContent = "Mostrar mais (" + fmt(itens.length - mostrados) + " restantes)";
     }
@@ -112,7 +115,7 @@
     '<section id="repetidos"><h2>O problema que não some</h2>' +
     '<p class="sub">Ruas que aparecem em 3 ou mais pedidos diferentes desde ' + br(R.legislatura.inicio) + ".</p>" +
     '<div class="aviso">Pedido repetido não prova que a Prefeitura ignorou o problema. Pode ser um problema novo no mesmo lugar, ou vereadores diferentes pedindo a mesma coisa.</div>' +
-    '<div class="controles" style="grid-template-columns:2fr 1fr"><input class="busca" id="qRep" type="search" placeholder="Buscar rua, bairro, vereador ou assunto (ex.: buraco)" autocomplete="off">' +
+    '<div class="controles controles-2"><input class="busca" id="qRep" type="search" placeholder="Buscar rua, bairro, vereador ou assunto (ex.: buraco)" autocomplete="off">' +
     '<select id="ordRep"><option value="n">Mais pedidos</option><option value="recente">Pedido mais recente</option></select></div>' +
     '<div class="destaque" id="resRep"></div><div id="listaRepetidos"></div></section>' +
 
@@ -176,9 +179,13 @@
              ultima: ms.length ? ms[ms.length - 1].data : "",
              texto: norm(r.rua + " " + Object.keys(bairros).join(" ") + " " + Object.keys(autores).join(" ") + " " + ms.map(function (m) { return m.ementa; }).join(" ")) };
   });
+  // mostra os primeiros nomes e resume o resto ("e mais 9"), para a lista nao virar um bloco de texto
+  function resumo(lista, n) { return lista.slice(0, n).join(", ") + (lista.length > n ? " e mais " + (lista.length - n) : ""); }
   function itemRepetido(r) {
     return '<li class="item"><h3>' + esc(r.rua) + ' <span class="pequeno num">— ' + r.ms.length + " pedidos</span></h3>" +
-      '<div class="meta">' + br(r.ms[0].data) + " a " + br(r.ultima) + (r.bairros.length ? " · " + esc(r.bairros.join(", ")) : "") + " · " + esc(r.autores.join(", ")) + "</div>" +
+      '<div class="meta"><span>' + br(r.ms[0].data) + " a " + br(r.ultima) + "</span>" +
+      (r.bairros.length ? "<span>" + esc(resumo(r.bairros, 2)) + "</span>" : "") +
+      "<span>" + esc(resumo(r.autores, 2)) + (r.autores.length === 1 ? "" : "") + "</span></div>" +
       "<details><summary>Ver os pedidos</summary><ul>" + r.ms.map(function (m) {
         return '<li><a href="' + linkMateria(m.cod) + '" target="_blank" rel="noopener">' + esc(m.id) + "</a> (" + br(m.data) + "): " + esc(m.ementa) + "</li>";
       }).join("") + "</ul></details></li>";
@@ -206,9 +213,10 @@
   function iniciais(n) { var p = String(n).replace(/\(.*?\)/g, "").trim().split(/\s+/); return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase(); }
   function anel(pres, just, falta) {
     var t = pres + just + falta, C = 2 * Math.PI * 28;
-    function seg(n, cor, desl) { return n ? '<circle cx="36" cy="36" r="28" fill="none" stroke="' + cor + '" stroke-width="9" stroke-dasharray="' + (n / t * C) + " " + C + '" stroke-dashoffset="' + (-desl / t * C) + '" transform="rotate(-90 36 36)"/>' : ""; }
-    return '<div class="anel"><svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="' + pres + " presenças em " + t + ' sessões"><circle cx="36" cy="36" r="28" fill="none" stroke="#eef1f4" stroke-width="9"/>' +
-      seg(pres, "#16181d", 0) + seg(just, "#eda100", pres) + seg(falta, "#b4232c", pres + just) + '</svg><b class="num">' + (t ? Math.round(pres / t * 100) : 0) + "%</b></div>";
+    // cores pelas variaveis do tema (funcionam no modo claro e no escuro)
+    function seg(n, cor, desl) { return n ? '<circle cx="36" cy="36" r="28" fill="none" style="stroke:' + cor + '" stroke-width="9" stroke-dasharray="' + (n / t * C) + " " + C + '" stroke-dashoffset="' + (-desl / t * C) + '" transform="rotate(-90 36 36)"/>' : ""; }
+    return '<div class="anel"><svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="' + pres + " presenças, " + just + " ausências justificadas e " + falta + " faltas em " + t + ' sessões"><circle cx="36" cy="36" r="28" fill="none" style="stroke:var(--fundo2)" stroke-width="9"/>' +
+      seg(pres, "var(--tinta)", 0) + seg(just, "var(--g-audiencia)", pres) + seg(falta, "var(--alerta)", pres + just) + '</svg><b class="num">' + (t ? Math.round(pres / t * 100) : 0) + "%</b></div>";
   }
   function cartao(v) {
     var p = v.propostas, tot = totalPropostas(v);

@@ -7,6 +7,7 @@
 <title>Radar Sem Limites · Bauru-SP · Diretoria de Ensino</title>
 <meta name="description" content="A administração da Diretoria de Ensino (URE) de Bauru: quem comanda, quanto recebe, quanto gasta e o que contrata, só com dados oficiais.">
 <link rel="stylesheet" href="estilo.css">
+<script src="tema.js"></script>
 </head>
 <body>
 <header>
@@ -209,10 +210,21 @@
   function desenharContratos() {
     var qq = norm(document.getElementById("qContr").value);
     var lista = D.contratos.filter(function (c) { return !qq || norm(c.fornecedor + " " + c.objeto).indexOf(qq) >= 0; });
-    document.getElementById("listaContr").innerHTML = lista.length ? '<ul class="lista">' + lista.slice(0, 40).map(function (c) {
-      return '<li class="item"><div class="meta"><span>' + br(c.data) + "</span><span>" + esc(c.via) + "</span><span>" + link(c.link, "ver no PNCP") + "</span></div>" +
-        "<p><b>" + reais(c.valor) + "</b> · " + esc(c.fornecedor) + (c.pf ? ' <span class="tag">pessoa física</span>' : "") + "</p><p class=\"pequeno\">" + esc(c.objeto) + "</p></li>";
-    }).join("") + "</ul>" + (lista.length > 40 ? '<p class="pequeno">Mostrando 40 de ' + fmt(lista.length) + ". Use a busca.</p>" : "") : '<p class="vazio">Nada encontrado.</p>';
+    var el = document.getElementById("listaContr");
+    if (!lista.length) { el.innerHTML = '<p class="vazio">Nada encontrado.</p>'; return; }
+    var mostrados = 0, ul = document.createElement("ul"), btn = document.createElement("button");
+    ul.className = "lista"; btn.className = "mais"; btn.type = "button";
+    el.innerHTML = ""; el.appendChild(ul); el.appendChild(btn);
+    function mais() {
+      var n = mostrados ? 10 : 3;                // 3 itens de inicio; depois 10 por clique
+      ul.insertAdjacentHTML("beforeend", lista.slice(mostrados, mostrados + n).map(function (c) {
+        return '<li class="item"><div class="meta"><span>' + br(c.data) + "</span><span>" + esc(c.via) + "</span><span>" + link(c.link, "ver no PNCP") + "</span></div>" +
+          "<p><b>" + reais(c.valor) + "</b> · " + esc(c.fornecedor) + (c.pf ? ' <span class="tag">pessoa física</span>' : "") + "</p><p class=\"pequeno\">" + esc(c.objeto) + "</p></li>";
+      }).join(""));
+      mostrados += n; btn.hidden = mostrados >= lista.length;
+      btn.textContent = "Mostrar mais (" + fmt(lista.length - mostrados) + " restantes)";
+    }
+    btn.onclick = mais; mais();
   }
   document.getElementById("qContr").addEventListener("input", desenharContratos);
   desenharContratos();

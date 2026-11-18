@@ -8,6 +8,9 @@
 #   a versao anterior.
 # - So publica se as paginas forem geradas e passarem na conferencia
 #   (verificar_site.py). Se algo falhar, o site no ar continua o mesmo.
+# - conferir_dados.py aponta fonte velha ou dado faltando. O site e publicado
+#   assim mesmo (com a data de cada fonte na secao "Situacao dos dados"), mas a
+#   execucao termina em VERMELHO, e o GitHub manda e-mail para a conta.
 name: Atualizar e publicar
 
 on:
@@ -28,6 +31,9 @@ jobs:
   atualizar:
     runs-on: ubuntu-latest
     timeout-minutes: 240
+    outputs:
+      pronto: ${{ steps.pronto.outputs.pronto }}
+      falhas: ${{ steps.conferencia.outputs.falhas }}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,7 +53,23 @@ jobs:
         run: |
           mkdir -p dados
           cp -rn semente/prefeitura semente/diretoria dados/ 2>/dev/null || true
-          ls -R dados/prefeitura dados/diretoria | head -20
+          # A semente traz a data real da coleta feita no computador local.
+          for f in semente/diretoria/estado.json; do
+            [ -f "$f" ] && python - "$f" <<'EOF'
+          import json, sys
+          semente = json.load(open(sys.argv[1], encoding="utf-8"))
+          caminho = "dados/diretoria/estado.json"
+          try:
+              atual = json.load(open(caminho, encoding="utf-8"))
+          except Exception:
+              atual = {}
+          for k, v in semente.items():
+              if k not in atual or atual[k]["ultima_boa"] < v["ultima_boa"]:
+                  atual[k] = v
+          json.dump(atual, open(caminho, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+          EOF
+          done
+          ls dados/prefeitura dados/diretoria
 
       - name: Arquivo anual do TCE-SP (so se ainda nao existir; ~2 GB lidos em fluxo)
         run: |
@@ -72,8 +94,17 @@ jobs:
         with:
           path: site
 
+      - id: pronto
+        run: echo "pronto=true" >> "$GITHUB_OUTPUT"
+
+      - id: conferencia
+        name: Ler a conferencia dos dados
+        run: |
+          python -c "import json; print('falhas=%d' % json.load(open('dados/conferencia.json', encoding='utf-8'))['falhas'])" >> "$GITHUB_OUTPUT" || echo "falhas=1" >> "$GITHUB_OUTPUT"
+
   publicar:
     needs: atualizar
+    if: ${{ always() && needs.atualizar.outputs.pronto == 'true' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -81,3 +112,13 @@ jobs:
     steps:
       - id: deploy
         uses: actions/deploy-pages@v4
+
+  avisar:
+    needs: [atualizar, publicar]
+    if: ${{ always() && needs.atualizar.outputs.falhas != '0' && needs.atualizar.outputs.pronto == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dado velho ou faltando (veja "Situacao dos dados" no resumo desta execucao)
+        run: |
+          echo "::error::${{ needs.atualizar.outputs.falhas }} fonte(s) passaram do prazo ou faltaram. O site foi publicado com a ultima versao boa."
+          exit 1

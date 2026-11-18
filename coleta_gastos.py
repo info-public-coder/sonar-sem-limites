@@ -24,6 +24,8 @@ import urllib.error
 import urllib.request
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, RAIZ)
+import estado  # noqa: E402
 PASTA = os.path.join(RAIZ, "dados", "gastos")
 TCE = "https://transparencia.tce.sp.gov.br/api/json/{tipo}/bauru/{ano}/{mes}"
 PNCP = "https://pncp.gov.br/api/consulta/v1"
@@ -125,6 +127,7 @@ def main():
         gravar(nome, dados)
         registros[nome] = (sum(len(m) for m in dados["meses"].values())
                            if isinstance(dados, dict) else len(dados))
+        estado.registrar(PASTA, nome, registros[nome])
         print(f"  gravado {nome}: {registros[nome]} registros")
 
     etapa("tce_despesas_ano_corrente",

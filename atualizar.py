@@ -51,6 +51,9 @@ def main():
         resultado[script] = rodar(script, True)
         if resultado[script] != 0:
             break
+    else:
+        # Nao bloqueia a publicacao: so mostra (e grava) o que esta velho ou faltando.
+        resultado["conferir_dados.py"] = rodar("conferir_dados.py", False)
     print("\n=== resumo ===")
     for script, codigo in resultado.items():
         print(f"  {'ok   ' if codigo == 0 else 'FALHA'}  {script}")
@@ -68,7 +71,7 @@ def main():
 # semente/, que o robo usa quando a coleta de la falha (ver semente/LEIA-ME.md).
 SEMENTE = {
     "prefeitura": ["equipe.json"],
-    "diretoria": ["equipe.json", "folha.json", "servidores.json", "pagamentos.json", "pncp.json"],
+    "diretoria": ["equipe.json", "folha.json", "servidores.json", "pagamentos.json", "pncp.json", "estado.json"],
 }
 
 

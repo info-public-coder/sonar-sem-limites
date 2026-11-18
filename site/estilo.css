@@ -149,3 +149,9 @@
   .nome-prog { font-size: .88rem; }
   .marca .cidade { font-weight: 600; letter-spacing: 0; color: var(--acento); background: var(--acento2);
     border-radius: 6px; padding: 1px 7px; margin-left: 4px; font-size: .8rem; white-space: nowrap; }
+
+  /* situacao dos dados */
+  #situacao .selo { font-weight: 700; border-radius: 4px; padding: 0 6px; font-size: .75rem; }
+  #situacao .situacao-ok .selo { background: #e8f6ef; color: #0f6b44; }
+  #situacao .situacao-aviso .selo { background: #fff4d6; color: #7a5400; }
+  #situacao .situacao-falha .selo { background: #fdecea; color: var(--alerta); }

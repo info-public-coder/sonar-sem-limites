@@ -51,6 +51,7 @@ import zipfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from regras import sem_acento  # noqa: E402
+import estado  # noqa: E402
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 PASTA = os.path.join(RAIZ, "dados", "diretoria")
@@ -185,6 +186,21 @@ def gravar(nome, dados):
     with open(caminho + ".parcial", "w", encoding="utf-8") as arq:
         json.dump(dados, arq, ensure_ascii=False, indent=1)
     os.replace(caminho + ".parcial", caminho)
+
+
+def quantidade(nome, dados):
+    """Numero que resume cada fonte, para o conferir_dados.py notar quedas bruscas."""
+    if nome == "equipe":
+        return len(dados["pessoas"])
+    if nome == "servidores":
+        return dados["sede"]
+    if nome == "folha":
+        return len(dados["equipe"])
+    if nome == "pagamentos":
+        return sum(len(a["pagamentos"]) for a in dados["anos"].values())
+    if nome == "pncp":
+        return len(dados["contratos"])
+    return None
 
 
 def ler(nome):
@@ -618,6 +634,7 @@ def main():
             falhas.append(nome)
             return ler(nome)
         gravar(nome, dados)
+        estado.registrar(PASTA, nome, quantidade(nome, dados))
         return dados
 
     print("URE Bauru - coletando")

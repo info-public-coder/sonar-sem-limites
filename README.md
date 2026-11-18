@@ -57,6 +57,10 @@ Dois robôs em `.github/workflows/`:
 - Na primeira execução o cache está vazio: o robô baixa tudo, inclusive o arquivo
   anual do TCE-SP (cerca de 2 GB lido em fluxo). Pode levar mais de uma hora.
 - Para ligar: Settings → Pages → Source: **GitHub Actions**.
+- `conferir_dados.py` roda no fim. Fonte que passou do prazo (Câmara 4 dias, TCE e PNCP 7, Prefeitura e
+  servidores/pagamentos da URE 45, que dependem do computador local) deixa a execução **vermelha** e o
+  GitHub manda e-mail; o site é publicado assim mesmo, com a data de cada fonte em "Situação dos dados".
+- `publicar.yml` ("Publicar agora") publica a pasta `site/` como está no repositório, em ~1 minuto.
 
 ## Arquivos
 
@@ -74,6 +78,8 @@ Dois robôs em `.github/workflows/`:
 | `verificar_site.py` | Confere as páginas: erros, seções desenhadas, largura de celular |
 | `atualizar.py` | Roda tudo na ordem |
 | `testar_fontes.py` | Testa se cada fonte responde (usado pelo robô de teste) |
+| `conferir_dados.py` | Aponta fonte velha, buraco ou queda de quantidade; gera a seção "Situação dos dados" e o resumo do Actions |
+| `estado.py` | Registra quando cada fonte deu certo pela última vez (usado pelos coletores) |
 | `config.json` | Subsídio dos vereadores e suas fontes |
 | `PLANO.md` / `PLANO-EXPANSAO.md` | Plano de implementação e decisões |
 | `CLAUDE.md` | Documento de passagem da investigação original |

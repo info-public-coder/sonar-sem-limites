@@ -1,0 +1,22 @@
+{
+ "equipe": {
+  "ultima_boa": "2026-11-18T13:38:16",
+  "registros": 15
+ },
+ "servidores": {
+  "ultima_boa": "2026-11-18T14:20:03",
+  "registros": 123
+ },
+ "folha": {
+  "ultima_boa": "2026-11-18T13:44:51",
+  "registros": 13
+ },
+ "pagamentos": {
+  "ultima_boa": "2026-11-18T14:07:35",
+  "registros": 5738
+ },
+ "pncp": {
+  "ultima_boa": "2026-11-18T13:56:05",
+  "registros": 38
+ }
+}

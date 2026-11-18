@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - coleta dos dados oficiais do SAPL da Camara Municipal de Bauru.
+Sonar Sem Limites - coleta dos dados oficiais do SAPL da Camara Municipal de Bauru.
 
 Le a API HTSQL aberta em https://sapl.bauru.sp.leg.br/api/ e salva os dados
 em dados/*.json, mais dados/coleta.json com o registro da rodada.
@@ -38,7 +38,7 @@ TIMEOUT = 60
 PAGINA = 2000        # registros por chamada nas tabelas grandes
 
 UA = (
-    "RadarBauru/0.2 (projeto cidadao de transparencia; "
+    "SonarSemLimites/0.2 (projeto cidadao de transparencia; "
     "coleta lenta, uma vez por dia, sem paralelismo)"
 )
 
@@ -246,7 +246,7 @@ def main():
     if "--testar" in sys.argv:
         return testar()
 
-    print("Radar Bauru - coletando do SAPL da Camara de Bauru")
+    print("Sonar Sem Limites - coletando do SAPL da Camara de Bauru")
     print(f"Pausa de {PAUSA}s entre as chamadas.\n")
     inicio = datetime.datetime.now()
 

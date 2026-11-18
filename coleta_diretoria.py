@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - Unidade Regional de Ensino (URE) Bauru, a antiga Diretoria de Ensino.
+Sonar Sem Limites - Unidade Regional de Ensino (URE) Bauru, a antiga Diretoria de Ensino.
 
 Foco: a ADMINISTRACAO da URE (quem tem cargo, quanto recebe, o que a unidade
 gasta e contrata). Nao coleta dados de alunos nem de escolas.
@@ -55,7 +55,7 @@ import estado  # noqa: E402
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 PASTA = os.path.join(RAIZ, "dados", "diretoria")
-UA_NAVEGADOR = "Mozilla/5.0 (RadarBauru/0.2; projeto cidadao de transparencia)"
+UA_NAVEGADOR = "Mozilla/5.0 (SonarSemLimites/0.2; projeto cidadao de transparencia)"
 UG = "080297"
 NOME_URE = "URE BAURU"
 CNPJ_SEDUC = "46384111000140"
@@ -572,7 +572,7 @@ def pagamentos(equipe, cargo_por_nome):
                 if NATUREZAS_PESSOA.search(sem_acento(natureza)):
                     k = chave(credor)[:30]
                     item["pessoa"] = True
-                    item["pessoa_id"] = abs(hash(("radar", k))) % 10**9   # so para contar pessoas distintas
+                    item["pessoa_id"] = abs(hash(("sonar", k))) % 10**9   # so para contar pessoas distintas
                     if k in nomes_equipe:
                         item["credor"] = nomes_equipe[k]
                     if credor not in cache_cargo:
@@ -597,7 +597,7 @@ def pncp_get(caminho, params):
     while True:
         q = urllib.parse.urlencode({**params, "pagina": pagina, "tamanhoPagina": 50})
         req = urllib.request.Request(f"{PNCP}/{caminho}?{q}",
-                                     headers={"User-Agent": "RadarBauru/0.2", "Accept": "application/json"})
+                                     headers={"User-Agent": "SonarSemLimites/0.2", "Accept": "application/json"})
         for n in range(5):
             try:
                 with urllib.request.urlopen(req, timeout=150) as resp:
@@ -648,7 +648,7 @@ def pncp():
         if not m:
             continue
         url = f"{PNCP}/orgaos/{m.group(1)}/compras/{m.group(3)}/{int(m.group(2))}"
-        req = urllib.request.Request(url, headers={"User-Agent": "RadarBauru/0.2", "Accept": "application/json"})
+        req = urllib.request.Request(url, headers={"User-Agent": "SonarSemLimites/0.2", "Accept": "application/json"})
         x = None
         for n in range(4):                  # o PNCP responde 429/504 quando esta cheio: espera e tenta de novo
             try:

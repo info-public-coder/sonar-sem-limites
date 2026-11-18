@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - gera site/prefeitura.js (pagina Prefeitura).
+Sonar Sem Limites - gera site/prefeitura.js (pagina Prefeitura).
 
 Junta tres fontes oficiais:
   dados/prefeitura/equipe.json      quem e quem (site da Prefeitura; coleta_prefeitura.py)
@@ -131,7 +131,7 @@ def montar():
     with open(caminho, encoding="utf-8") as arq:
         equipe = json.load(arq)
     tce = tce_por_programa()
-    radar, _ = gerar_site.montar()
+    camara, _ = gerar_site.montar()
     pessoas = []
     for p in equipe["pessoas"]:
         chave = regras.sem_acento(p["cargo"])
@@ -156,15 +156,15 @@ def montar():
     prefeita = propostas_da_prefeita()
     generico = sum(v for p, v in (tce["programas"].items() if tce else []) if GENERICO in regras.sem_acento(p))
     return {
-        "gerado_em": radar["gerado_em"],
+        "gerado_em": camara["gerado_em"],
         "equipe_fonte": equipe["fonte"],
         "equipe_coletada": equipe["coletado_em"],
         "sapl": gerar_site.SAPL,
         "pessoas": pessoas,
         "propostas": prefeita,
         "grupos": {**regras.GRUPOS, "veto": "Vetos a leis aprovadas pela Câmara"},
-        "cobrancas_vereadores": radar["por_grupo"].get("cobranca", 0),
-        "camara_coleta": radar["coleta"],
+        "cobrancas_vereadores": camara["por_grupo"].get("cobranca", 0),
+        "camara_coleta": camara["coleta"],
         "tce_corrente": corrente,
         "tce": {"ano": tce["ano"],
                 "prefeitura": round(tce["orgaos"].get("Prefeitura", 0), 2),

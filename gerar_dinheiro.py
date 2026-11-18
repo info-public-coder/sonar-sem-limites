@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - gera site/dinheiro.js a partir de:
+Sonar Sem Limites - gera site/dinheiro.js a partir de:
   dados/tce/despesas-AAAA-bauru.csv   (ano fechado, detalhado; coleta_tce_anual.py)
   dados/gastos/*.json                 (ano corrente pelo TCE + PNCP; coleta_gastos.py)
 

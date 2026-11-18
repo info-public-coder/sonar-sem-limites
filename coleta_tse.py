@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - fotos oficiais e votos de 2024 dos vereadores, pelo TSE.
+Sonar Sem Limites - fotos oficiais e votos de 2024 dos vereadores, pelo TSE.
 
 Fonte: Portal de Dados Abertos do TSE (cdn.tse.jus.br), que abre de qualquer
 rede. Os arquivos sao grandes (o de fotos de SP tem 2,2 GB), mas o servidor
@@ -46,7 +46,7 @@ CDN = "https://cdn.tse.jus.br/estatistica/sead"
 CAND = CDN + "/odsele/consulta_cand/consulta_cand_2024.zip"
 VOTOS = CDN + "/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2024.zip"
 FOTOS_ZIP = CDN + "/eleicoes/eleicoes2024/fotos/foto_cand2024_SP_div.zip"
-UA = "RadarBauru/0.2 (projeto cidadao de transparencia)"
+UA = "SonarSemLimites/0.2 (projeto cidadao de transparencia)"
 MUNICIPIO = "BAURU"
 GUARDAR = ["SQ_CANDIDATO", "NM_URNA_CANDIDATO", "NM_CANDIDATO", "NR_CANDIDATO", "SG_PARTIDO",
            "DS_SIT_TOT_TURNO", "DS_CARGO"]

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - numeros por vereador no terminal, para conferir com a ficha
+Sonar Sem Limites - numeros por vereador no terminal, para conferir com a ficha
 oficial. Usa exatamente o mesmo calculo do site (gerar_site.montar).
 
 Uso:

@@ -24,7 +24,7 @@ As páginas abrem direto do disco, sem servidor.
 ## Como atualizar
 
 O Python do projeto fica em `..\..\.python_embed\python.exe`; não há `python` no
-PATH. Na pasta `radar-bauru`:
+PATH. Na pasta `sonar-bauru`:
 
 ```
 ..\..\.python_embed\python.exe atualizar.py

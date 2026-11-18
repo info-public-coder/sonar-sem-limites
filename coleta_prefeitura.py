@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - equipe de governo da Prefeitura (Prefeita, vice e secretarios).
+Sonar Sem Limites - equipe de governo da Prefeitura (Prefeita, vice e secretarios).
 
 Fonte oficial: pagina "Equipe de Governo" do site da Prefeitura
 (https://www2.bauru.sp.gov.br/equipe_governo.aspx). Guarda cargo, nome,
@@ -28,7 +28,7 @@ PASTA = os.path.join(RAIZ, "dados", "prefeitura")
 FOTOS = os.path.join(RAIZ, "site", "fotos")
 SITE = "https://www2.bauru.sp.gov.br"
 PAGINA = SITE + "/equipe_governo.aspx"
-UA = "RadarBauru/0.2 (projeto cidadao de transparencia)"
+UA = "SonarSemLimites/0.2 (projeto cidadao de transparencia)"
 PAUSA = 1.0
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - baixa o arquivo ANUAL de despesas ou receitas do TCE-SP
+Sonar Sem Limites - baixa o arquivo ANUAL de despesas ou receitas do TCE-SP
 (todos os municipios do estado) e guarda so as linhas de Bauru.
 
 O arquivo de despesas tem ~2 GB por ano. Ele e lido em fluxo: o zip e
@@ -23,7 +23,7 @@ URL = "https://transparencia.tce.sp.gov.br/sites/default/files/conjunto-dados/{t
 IBGE_BAURU = b"3506003"
 NOME_BAURU = b"Bauru"
 PASTA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dados", "tce")
-UA = "RadarBauru/0.2 (projeto cidadao de transparencia)"
+UA = "SonarSemLimites/0.2 (projeto cidadao de transparencia)"
 
 
 def main():

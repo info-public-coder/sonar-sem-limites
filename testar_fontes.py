@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - testa se cada fonte responde a partir da maquina onde roda.
+Sonar Sem Limites - testa se cada fonte responde a partir da maquina onde roda.
 
 Faz UMA requisicao leve por fonte e mostra o resultado. Serve para saber, por
 exemplo, se o servidor da Camara aceita conexoes do GitHub Actions.
@@ -15,7 +15,7 @@ import sys
 import time
 import urllib.request
 
-UA = "Mozilla/5.0 (RadarBauru/0.2; projeto cidadao de transparencia)"
+UA = "Mozilla/5.0 (SonarSemLimites/0.2; projeto cidadao de transparencia)"
 
 FONTES = [
     ("Camara (SAPL, API)", "https://sapl.bauru.sp.leg.br/api/legislatura.limit(1)/:json", "python"),

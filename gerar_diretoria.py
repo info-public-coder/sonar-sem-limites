@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - gera site/diretoria.js (pagina Diretoria de Ensino / URE Bauru)
+Sonar Sem Limites - gera site/diretoria.js (pagina Diretoria de Ensino / URE Bauru)
 a partir de dados/diretoria/*.json (coleta_diretoria.py).
 
 Regua oficial usada para apontar desvio:

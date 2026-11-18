@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - confere as paginas do site num navegador sem janela (Edge ou
+Sonar Sem Limites - confere as paginas do site num navegador sem janela (Edge ou
 Chrome), na largura de um celular (412px). Rodar depois de QUALQUER mudanca
 no site ou nos geradores.
 

@@ -1,4 +1,4 @@
-# Robo diario do Radar Bauru: coleta, gera as paginas, confere e publica.
+# Robo diario do Sonar Sem Limites: coleta, gera as paginas, confere e publica.
 #
 # - Roda todo dia as 03:00 de Brasilia (06:00 UTC) e quando voce clicar em
 #   Actions -> "Atualizar e publicar" -> "Run workflow".

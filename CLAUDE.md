@@ -1,4 +1,4 @@
-# Radar Bauru — documento de passagem
+# Sonar Sem Limites — documento de passagem
 
 Este arquivo existe para que o Claude (no VS Code / Claude Code) continue este projeto
 exatamente de onde a conversa anterior parou, sem precisar refazer a investigação.
@@ -131,7 +131,7 @@ testados: `registro_votacao_parlamentar`, `voto`, `votacao_nominal`,
 esquerdo de `https://sapl.bauru.sp.leg.br/api/` para listar todas as tabelas do banco de
 uma vez, em vez de adivinhar nome por nome.
 
-**Se não existir:** o Radar de Bauru sai **sem** o ranking "Quem mais votou não", e o site
+**Se não existir:** o Sonar Sem Limites sai **sem** o ranking "Quem mais votou não", e o site
 precisa dizer isso na seção de transparência. O manual é explícito:
 *"Dado ausente não é falta"* — se o sistema não registrou, o site não pode acusar.
 
@@ -191,6 +191,6 @@ direto. Comece por aí.
 
 Abra esta pasta no VS Code com o Claude Code e diga algo como:
 
-> Leia o CLAUDE.md desta pasta. Vamos continuar o Radar Bauru a partir da seção 5.
+> Leia o CLAUDE.md desta pasta. Vamos continuar o Sonar Sem Limites a partir da seção 5.
 > Comece rodando a coleta e me mostre os números de dois vereadores antes de montar
 > qualquer página.

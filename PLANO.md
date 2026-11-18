@@ -1,4 +1,4 @@
-# Radar Bauru — plano de implementação
+# Sonar Sem Limites — plano de implementação
 
 Acompanha a seção 5 do `CLAUDE.md`. Atualizar o status a cada etapa concluída.
 Regra: **nenhuma página é montada antes de a coleta rodar e os números de dois

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - atualiza tudo, na ordem certa, e confere as paginas no fim.
+Sonar Sem Limites - atualiza tudo, na ordem certa, e confere as paginas no fim.
 
   1. coleta.py          Camara (SAPL). Se o servidor nao responder (ele bloqueia
                         algumas redes), mantem os dados da ultima coleta boa.

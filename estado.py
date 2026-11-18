@@ -1,5 +1,5 @@
 """
-Radar Bauru - registro de quando cada fonte deu certo pela ultima vez.
+Sonar Sem Limites - registro de quando cada fonte deu certo pela ultima vez.
 
 Cada coletor chama registrar() SO quando uma fonte vem completa e e gravada.
 O arquivo <pasta>/estado.json guarda, por fonte, a data da ultima coleta boa

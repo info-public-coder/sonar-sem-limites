@@ -1,5 +1,5 @@
 """
-Radar Bauru - regras de classificacao. A MESMA regra vale para todos os
+Sonar Sem Limites - regras de classificacao. A MESMA regra vale para todos os
 vereadores, e o texto de EXPLICACAO aparece no site, na secao Transparencia.
 
 Classificacao usa o tipo da materia no SAPL (des_tipo_materia) e palavras da

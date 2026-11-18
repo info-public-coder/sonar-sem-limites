@@ -1,4 +1,4 @@
-# Radar Bauru: plano de expansão
+# Sonar Sem Limites: plano de expansão
 
 Situação: **aprovado em 13/11/2026**, com as decisões abaixo. A implementação
 ainda não começou.
@@ -47,12 +47,12 @@ ainda não começou.
   publicar.
 - **Sem pedidos por e-SIC ou LAI.** Dado que não existe em fonte aberta fica de fora,
   e o site diz isso.
-- Antes de publicar, `radar-bauru` vira um repositório próprio (hoje está dentro do
+- Antes de publicar, `sonar-bauru` vira um repositório próprio (hoje está dentro do
   git de `Py_Projetos`).
 - PNCP: 5.562 contratos da Prefeitura só em 2025. Reduzidos aos campos úteis, cerca
   de 1–2 MB.
 
-Amplia o Radar da Câmara para três áreas novas:
+Amplia o Sonar da Câmara para três áreas novas:
 
 - **A.** Arrecadação polêmica: multas e radares, impostos e taxas.
 - **B.** Prefeita e secretarias.

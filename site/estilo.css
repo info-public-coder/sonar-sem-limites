@@ -13,23 +13,7 @@
     --g-utilidade: #e87ba4; --g-homenagem: #008300; --g-outros: #6250d6;
     --barra: #2a78d6;
   }
-  /* modo escuro: segue o sistema, salvo se a pessoa escolheu "claro" no botão de tema */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --bg: #121416; --superficie: #1b1e22; --fundo2: #23272d; --linha: #3a414a;
-      --tinta: #eef0f3; --suave: #b9bfc8;
-      --acento: #8ab4f8; --acento-forte: #aecbfa; --acento2: #1c2a3f; --sobre-acento: #0d1117;
-      --foco: #8ab4f8;
-      --alerta: #ff8f8f; --ruim-fundo: #3b1f22;
-      --ok: #5cd39a; --ok-texto: #8be3b8; --ok-fundo: #15322a;
-      --aviso-fundo: #3a2f12; --aviso-texto: #ffe3a1; --aviso-borda: #e0a800;
-      /* mesma ordem, tons validados para fundo escuro (validador da paleta: todos os critérios ok) */
-      --g-bairro: #3987e5; --g-cobranca: #d95926; --g-lei: #199e70; --g-audiencia: #c98500;
-      --g-utilidade: #d55181; --g-homenagem: #008300; --g-outros: #9085e9;
-      --barra: #3987e5;
-    }
-  }
+  /* modo escuro: só quando a pessoa liga o interruptor (o site abre sempre no claro) */
   :root[data-theme="dark"] {
     color-scheme: dark;
     --bg: #121416; --superficie: #1b1e22; --fundo2: #23272d; --linha: #3a414a;
@@ -226,8 +210,8 @@
   .aviso::before { content: "Atenção: "; font-weight: 700; }
   /* tabelas de barras e trilhos no modo escuro */
   .barras .trilho, .trilho-s, .pilha, .barra { background: var(--fundo2); }
-  /* botão de tema */
-  .tema { font: inherit; font-size: .8rem; min-height: 32px; padding: 3px 10px; border-radius: 999px;
+  /* (antigo botão de tema, substituído pelo interruptor) */
+  .tema-antigo { font: inherit; font-size: .8rem; min-height: 32px; padding: 3px 10px; border-radius: 999px;
     border: 1px solid var(--linha); background: var(--superficie); color: var(--tinta); cursor: pointer; }
   .tema:hover { border-color: var(--acento); }
   .topo-dir { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
@@ -244,3 +228,37 @@
   .marca > span { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 0; line-height: 1.2; }
   .marca .logo { width: 56px; height: 56px; flex: none; border-radius: 50%; }
   @media (min-width: 560px) { .marca .logo { width: 64px; height: 64px; } }
+
+  /* marca: logo (abre ampliado) + nome (leva ao início) */
+  .marca { display: inline-flex; align-items: center; gap: 10px; }
+  .logo-botao { padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 50%; flex: none; line-height: 0; }
+  .logo-botao:hover .logo { transform: scale(1.05); }
+  .logo { transition: transform .15s; }
+  .marca-nome { color: var(--tinta); text-decoration: none; font-weight: 700; letter-spacing: .02em; line-height: 1.25; }
+  .marca-nome:hover { color: var(--acento); text-decoration: none; }
+
+  /* interruptor de tema (canto superior direito) */
+  .topo { align-items: flex-start; }
+  .topo-dir { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .interruptor { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 4px 10px;
+    font: inherit; font-size: .85rem; color: var(--tinta); background: var(--superficie);
+    border: 1px solid var(--linha); border-radius: 999px; cursor: pointer; }
+  .interruptor:hover { border-color: var(--acento); }
+  .interruptor .ic { font-size: 1rem; line-height: 1; color: var(--suave); }
+  .interruptor .trilho { position: relative; width: 40px; height: 22px; border-radius: 999px; background: var(--fundo2);
+    border: 1px solid var(--linha); transition: background .15s; }
+  .interruptor .bola { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--suave); transition: transform .15s, background .15s; }
+  .interruptor[aria-checked="true"] .trilho { background: var(--acento); border-color: var(--acento); }
+  .interruptor[aria-checked="true"] .bola { transform: translateX(18px); background: var(--sobre-acento); }
+  .interruptor .rotulo-tema { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* logo ampliado */
+  .foto-grande { border: 0; padding: 0; background: transparent; max-width: 92vw; overflow: visible; text-align: center; }
+  .foto-grande::backdrop { background: rgba(0, 0, 0, .82); }
+  .foto-grande img { display: block; width: min(86vw, 86vh, 512px); height: auto; border-radius: 50%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .5); }
+  .foto-grande p { color: #fff; margin: 12px 0 0; font-weight: 600; }
+  .foto-grande .fechar { position: absolute; top: -8px; right: -8px; width: 44px; height: 44px; border-radius: 50%;
+    border: 2px solid #fff; background: rgba(0, 0, 0, .7); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .foto-grande .fechar:hover { background: #000; }

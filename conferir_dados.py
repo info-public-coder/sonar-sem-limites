@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - confere se ha dado faltando ou velho, fonte por fonte.
+Sonar Sem Limites - confere se ha dado faltando ou velho, fonte por fonte.
 
 Para cada fonte: data da ultima coleta boa (estado.json dos coletores), prazo
 maximo, buracos (meses do TCE, os 21 vereadores) e quedas bruscas de
@@ -106,18 +106,18 @@ def conferir():
 
     # ---- Camara
     man = ler_json(os.path.join(DADOS, "coleta.json")) or {}
-    radar = ler_js("dados.js", "RADAR") or {}
-    em_exercicio = sum(1 for v in radar.get("vereadores", []) if v.get("em_exercicio"))
-    extra = r.contagem("camara_materias", len(radar.get("materias", [])) or None)
+    camara = ler_js("dados.js", "SONAR") or {}
+    em_exercicio = sum(1 for v in camara.get("vereadores", []) if v.get("em_exercicio"))
+    extra = r.contagem("camara_materias", len(camara.get("materias", [])) or None)
     r.prazo("Câmara", "Câmara (SAPL)", man.get("fim"), PRAZO_CAMARA, extra)
-    if radar:
+    if camara:
         if em_exercicio != VEREADORES:
             r.add("Câmara", "Vereadores em exercício", "falha", man.get("fim"),
                   f"{em_exercicio} no site; a Câmara tem {VEREADORES}")
         else:
             r.add("Câmara", "Vereadores em exercício", "ok", man.get("fim"), f"{em_exercicio} de {VEREADORES}")
     tse = ler_json(os.path.join(DADOS, "tse", "candidatos_bauru_2024.json"))
-    sem_foto = [v["nome"] for v in radar.get("vereadores", []) if v.get("em_exercicio") and not v.get("foto")]
+    sem_foto = [v["nome"] for v in camara.get("vereadores", []) if v.get("em_exercicio") and not v.get("foto")]
     r.add("Câmara", "Fotos e votos (TSE 2024)", "ok" if tse and not sem_foto else "aviso", None,
           "todos com foto" if tse and not sem_foto else
           ("sem foto: " + ", ".join(sem_foto) if sem_foto else "arquivo do TSE ausente"))

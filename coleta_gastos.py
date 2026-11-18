@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - coleta de gastos e contratos (fontes que nao sao a Camara).
+Sonar Sem Limites - coleta de gastos e contratos (fontes que nao sao a Camara).
 
   1. TCE-SP, API mensal por municipio: despesas de Bauru do ano corrente
      (o ano anterior, completo e detalhado, vem de coleta_tce_anual.py).
@@ -32,7 +32,7 @@ PNCP = "https://pncp.gov.br/api/consulta/v1"
 CNPJ_PREFEITURA = "46137410000180"
 ANO_INICIAL = 2025
 PAUSA = 1.0
-UA = "RadarBauru/0.2 (projeto cidadao de transparencia)"
+UA = "SonarSemLimites/0.2 (projeto cidadao de transparencia)"
 POR_PAGINA = 50
 MODALIDADES_DIRETAS = {8: "Dispensa", 9: "Inexigibilidade"}
 

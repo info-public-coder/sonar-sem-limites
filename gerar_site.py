@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Radar Bauru - transforma dados/*.json em site/dados.js (lido por site/index.html).
+Sonar Sem Limites - transforma dados/*.json em site/dados.js (lido por site/index.html).
 
 Uso:
     python gerar_site.py              gera site/dados.js
@@ -307,7 +307,7 @@ def main():
     os.makedirs(SITE, exist_ok=True)
     caminho = os.path.join(SITE, "dados.js")
     with open(caminho + ".parcial", "w", encoding="utf-8") as arq:
-        arq.write("window.RADAR = ")
+        arq.write("window.SONAR = ")
         json.dump(saida, arq, ensure_ascii=False, separators=(",", ":"))
         arq.write(";\n")
     os.replace(caminho + ".parcial", caminho)

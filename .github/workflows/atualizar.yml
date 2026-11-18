@@ -1,0 +1,77 @@
+# Robo diario do Radar Bauru: coleta, gera as paginas, confere e publica.
+#
+# - Roda todo dia as 03:00 de Brasilia (06:00 UTC) e quando voce clicar em
+#   Actions -> "Atualizar e publicar" -> "Run workflow".
+# - A pasta dados/ (materia-prima, com dado pessoal e arquivos grandes) NAO vai
+#   para o repositorio: fica guardada no cache do Actions, que nao e publico.
+#   Assim cada execucao parte da ultima coleta boa: uma fonte que falhar mantem
+#   a versao anterior.
+# - So publica se as paginas forem geradas e passarem na conferencia
+#   (verificar_site.py). Se algo falhar, o site no ar continua o mesmo.
+name: Atualizar e publicar
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: atualizar
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Recuperar a ultima coleta boa (cache)
+        uses: actions/cache/restore@v4
+        with:
+          path: dados
+          key: dados-${{ github.run_id }}
+          restore-keys: |
+            dados-
+
+      - name: Arquivo anual do TCE-SP (so se ainda nao existir; ~2 GB lidos em fluxo)
+        run: |
+          ANO=$(( $(date +%Y) - 1 ))
+          if [ ! -f "dados/tce/despesas-${ANO}-bauru.csv" ]; then
+            python -u coleta_tce_anual.py despesas "$ANO" || echo "::warning::arquivo anual do TCE de $ANO nao baixou"
+          fi
+
+      - name: Coletar, gerar e conferir
+        run: python -u atualizar.py
+
+      - name: Guardar a coleta para a proxima execucao
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: dados
+          key: dados-${{ github.run_id }}
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publicar:
+    needs: atualizar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

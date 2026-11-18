@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Sem Limites · Bauru-SP · Dinheiro</title>
+<meta name="description" content="Para onde vai o dinheiro público de Bauru, só com dados oficiais do Tribunal de Contas e do Portal Nacional de Contratações.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header>
+  <div class="topo">
+    <span class="marca">RADAR SEM LIMITES <span class="cidade">Bauru-SP</span></span>
+    <span class="vivo" id="vivo"><i></i><span>carregando…</span></span>
+  </div>
+  <nav class="menu"><a href="index.html">Câmara</a><a href="prefeitura.html">Prefeitura</a><a href="dinheiro.html" aria-current="page">Dinheiro</a><a href="diretoria.html">Diretoria de Ensino</a></nav>
+  <h1>Dinheiro de Bauru</h1>
+  <p class="sub" style="margin-top:8px">Para onde vai o dinheiro público, com dados oficiais do Tribunal de Contas do Estado e do Portal Nacional de Contratações.</p>
+  <div class="abas" id="abaAno" role="group" aria-label="Ano"></div>
+  <div class="abas" id="abaOrgao" role="group" aria-label="Órgão"></div>
+  <p class="pequeno" id="avisoAno"></p>
+</header>
+
+<main id="app"><noscript><p>Este site precisa de JavaScript para mostrar os dados.</p></noscript></main>
+
+<footer>
+  <p><b>Radar Sem Limites · Bauru-SP</b>: projeto independente, sem vínculo com a Câmara Municipal, a Prefeitura ou partidos.
+  Todos os números vêm de fontes oficiais, com link.</p>
+  <p>Achou um erro? Ele será corrigido. Confira sempre na fonte oficial.</p>
+</footer>
+
+<script src="dinheiro.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.DINHEIRO, app = document.getElementById("app");
+  if (!D) {
+    app.innerHTML = '<section><p class="vazio">Os dados ainda não foram gerados. Rode <code>python coleta_gastos.py</code> e <code>python gerar_dinheiro.py</code>.</p></section>';
+    return;
+  }
+  var MESES = ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+  var NOMES_EVENTO = D.grupos_evento;
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function norm(s) { return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function br(d) { if (!d) return "—"; if (d.indexOf("/") > 0) return d; var p = d.split("-"); return p[2] + "/" + p[1] + "/" + p[0]; }
+  function reais(v) {
+    var a = Math.abs(v);
+    if (a >= 1e9) return "R$ " + (v / 1e9).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + " bi";
+    if (a >= 1e6) return "R$ " + (v / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " mi";
+    if (a >= 1e4) return "R$ " + Math.round(v / 1e3).toLocaleString("pt-BR") + " mil";
+    return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+  function reaisExato(v) { return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+  function barras(itens, total) {
+    var max = itens.length ? itens[0][1] : 1;
+    return '<ul class="barras">' + itens.map(function (it) {
+      var pct = total ? Math.round(1000 * it[1] / total) / 10 : 0;
+      return '<li title="' + esc(it[0]) + ": " + reaisExato(it[1]) + " (" + pct.toLocaleString("pt-BR") + '% do total)"><span class="rotulo">' + esc(it[0]) +
+        '</span><span class="valor">' + reais(it[1]) + '</span><span class="trilho"><i style="width:' + Math.max(0.5, 100 * it[1] / max) + '%"></i></span></li>';
+    }).join("") + "</ul>";
+  }
+  function paginada(el, itens, render, passo) {
+    var mostrados = 0, ul = document.createElement("ul"), btn = document.createElement("button");
+    ul.className = "lista"; btn.className = "mais"; btn.type = "button";
+    el.innerHTML = "";
+    if (!itens.length) { el.innerHTML = '<p class="vazio">Nada encontrado.</p>'; return; }
+    el.appendChild(ul); el.appendChild(btn);
+    function mais() {
+      ul.insertAdjacentHTML("beforeend", itens.slice(mostrados, mostrados + passo).map(render).join(""));
+      mostrados += passo; btn.hidden = mostrados >= itens.length;
+      btn.textContent = "Mostrar mais (" + (itens.length - mostrados).toLocaleString("pt-BR") + " restantes)";
+    }
+    btn.onclick = mais; mais();
+  }
+  function fornecedor(nome, pf) { return esc(nome) + (pf ? '<span class="tag">pessoa física</span>' : ""); }
+
+  var anos = Object.keys(D.anos).sort().reverse();
+  var estado = { ano: anos[0], orgao: "Prefeitura" };
+  document.querySelector("#vivo span").textContent = "Dados de " + br(D.gerado_em.slice(0, 10));
+
+  function botoes(el, valores, rotulo, chave) {
+    el.innerHTML = valores.map(function (v) { return '<button type="button" data-v="' + esc(v) + '" aria-pressed="' + (estado[chave] === v) + '">' + esc(rotulo(v)) + "</button>"; }).join("");
+    el.onclick = function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      estado[chave] = b.getAttribute("data-v"); desenhar();
+    };
+  }
+
+  function desenhar() {
+    var A = D.anos[estado.ano];
+    var orgaos = Object.keys(A.orgaos);
+    if (orgaos.indexOf(estado.orgao) < 0) estado.orgao = orgaos[0];
+    botoes(document.getElementById("abaAno"), anos, function (a) { return D.anos[a].completo ? a : a + " (parcial)"; }, "ano");
+    botoes(document.getElementById("abaOrgao"), orgaos, function (o) { return o; }, "orgao");
+    document.getElementById("avisoAno").innerHTML = A.completo
+      ? "Ano completo, com o detalhe de cada pagamento (arquivo anual do TCE-SP)."
+      : "Parcial: de janeiro até " + MESES[A.ate_mes] + " de " + estado.ano + ". O TCE-SP só publica o detalhe por área e modalidade quando o ano fecha; por enquanto há o total pago e quem recebeu.";
+
+    var O = estado.orgao, total = A.orgaos[O] || 0, interno = (A.interno || {})[O] || 0;
+    var forn = (A.fornecedores || {})[O] || [];
+    var h = "";
+
+    h += '<section id="total"><h2>Quanto ' + (O === "Prefeitura" ? "a Prefeitura" : esc(O)) + " pagou</h2>" +
+      '<p class="sub">Valor efetivamente pago em ' + esc(estado.ano) + (A.completo ? "" : " (até " + MESES[A.ate_mes] + ")") + ". Empenho (reserva do dinheiro) não conta: só o que saiu do caixa.</p>" +
+      '<div class="tiles"><div class="tile"><b>' + reais(total) + "</b><span>pago no total</span></div>" +
+      '<div class="tile"><b>' + reais(interno) + "</b><span>para a própria administração (folha, previdência, repasses entre órgãos)</span></div>" +
+      '<div class="tile"><b>' + reais(total - interno) + "</b><span>para empresas, entidades e pessoas</span></div></div>" +
+      '<p class="pequeno">Todos os órgãos em ' + esc(estado.ano) + ": " + orgaos.map(function (o) { return esc(o) + " " + reais(A.orgaos[o]); }).join(" · ") + ".</p></section>";
+
+    if (A.areas && A.areas[O]) {
+      h += '<section id="areas"><h2>Para onde vai o dinheiro</h2><p class="sub">Por área de governo, a classificação oficial do orçamento. Área não é o mesmo que secretaria: uma secretaria pode gastar em mais de uma área.</p>' +
+        barras(A.areas[O].slice(0, 12), total) + "</section>";
+    }
+    if (A.modalidades && A.modalidades[O]) {
+      h += '<section id="modalidades"><h2>Como comprou</h2><p class="sub">Pagamentos por forma de contratação. O que não passa por licitação por natureza (o TCE-SP marca como "Outros/não aplicável") aparece aberto pelo tipo de despesa: salários, previdência, repasses a entidades, dívida, contas de consumo etc. A separação usa o código oficial da natureza da despesa. Terceirização e contas de consumo aparecem como "modalidade não informada": elas podem vir de contratos licitados, e o TCE-SP só não registrou a forma.</p>' +
+        barras(A.modalidades[O], total) +
+        '<p class="pequeno"><b>Dispensa</b> e <b>inexigível</b> são compras sem disputa entre fornecedores, permitidas pela lei em casos específicos (valor baixo, emergência, fornecedor único, artista consagrado).</p></section>';
+    }
+
+    h += '<section id="fornecedores"><h2>Quem mais recebeu</h2><p class="sub">Empresas, entidades e pessoas que mais receberam ' + (O === "Prefeitura" ? "da Prefeitura" : "de " + esc(O)) + " em " + esc(estado.ano) +
+      '. Não inclui pagamentos à própria administração. Pessoa física aparece com o nome, nunca com o CPF.</p>' +
+      '<input class="busca" id="qForn" type="search" placeholder="Buscar fornecedor" autocomplete="off"><div id="listaForn" style="margin-top:12px"></div></section>';
+
+    h += '<section id="eventos"><h2>Shows e eventos</h2>';
+    var ev = (A.eventos || []).filter(function (e) { return e.orgao === O; });
+    if (A.eventos) {
+      var soma = {}; ev.forEach(function (e) { soma[e.grupo] = (soma[e.grupo] || 0) + e.valor; });
+      h += '<p class="sub">Pagamentos de ' + esc(estado.ano) + " cuja descrição oficial cita apresentação artística, show, carnaval ou estrutura de evento (palco, som, tendas, banheiros).</p>" +
+        '<div class="tiles">' + Object.keys(NOMES_EVENTO).map(function (g) { return '<div class="tile"><b>' + reais(soma[g] || 0) + "</b><span>" + esc(NOMES_EVENTO[g]) + "</span></div>"; }).join("") + "</div>" +
+        '<div id="listaEventos"></div>';
+    } else {
+      h += '<p class="sub">O detalhe dos pagamentos de ' + esc(estado.ano) + " só sai quando o TCE-SP fechar o ano. Abaixo, as contratações sem licitação de " + esc(estado.ano) + " publicadas no PNCP cuja descrição cita show ou evento.</p><div id=\"listaEventos\"></div>";
+    }
+    h += '<p class="pequeno">A regra procura termos exatos na descrição oficial. Um pagamento descrito de outra forma pode ficar de fora.</p></section>';
+
+    h += '<section id="contratos"><h2>Contratos e compras sem licitação</h2><p class="sub">Publicados pela Prefeitura no Portal Nacional de Contratações Públicas (PNCP), desde 2025. Cada item tem link para a página oficial.</p>' +
+      '<div class="abas" id="abaContr"><button type="button" data-v="contratos" aria-pressed="true">Contratos (' + D.contratos.length.toLocaleString("pt-BR") + ")</button>" +
+      '<button type="button" data-v="Dispensa" aria-pressed="false">Dispensas</button><button type="button" data-v="Inexigibilidade" aria-pressed="false">Inexigibilidades</button></div>' +
+      '<input class="busca" id="qContr" type="search" placeholder="Buscar por assunto ou fornecedor" autocomplete="off" style="margin-top:8px">' +
+      '<div class="destaque" id="resContr"></div><div id="listaContr"></div></section>';
+
+    h += '<section id="fontes" class="transp"><h2>De onde vêm os números</h2><dl>' +
+      '<dt>Pagamentos</dt><dd>Tribunal de Contas do Estado de São Paulo (TCE-SP), que recebe a contabilidade de todos os municípios. Ano fechado: <a href="' + D.fontes.tce_anual + '" target="_blank" rel="noopener">arquivo anual de despesas</a>. Ano corrente: <a href="' + D.fontes.tce_api + '" target="_blank" rel="noopener">consulta mensal do TCE-SP</a>.</dd>' +
+      "<dt>Pago, não empenhado</dt><dd>Mostramos o valor pago. Empenho é só a reserva do dinheiro e pode ser cancelado.</dd>" +
+      "<dt>Própria administração</dt><dd>Pagamentos em que quem recebe é a própria Prefeitura, a FUNPREV, o DAE, a EMDURB ou a Câmara (folha, previdência, repasses) aparecem à parte, para não parecerem fornecedores.</dd>" +
+      '<dt>Contratos</dt><dd><a href="' + D.fontes.pncp + '" target="_blank" rel="noopener">Portal Nacional de Contratações Públicas</a>, onde os órgãos são obrigados a publicar licitações e contratos (Lei 14.133/2021). Valor do contrato é o valor combinado, não o já pago.</dd>' +
+      "<dt>Pessoa física</dt><dd>Aparece o nome, nunca o CPF.</dd>" +
+      "</dl></section>";
+
+    app.innerHTML = h;
+
+    var qF = document.getElementById("qForn");
+    function filtrarForn() {
+      var q = norm(qF.value);
+      paginada(document.getElementById("listaForn"), forn.filter(function (f) { return !q || norm(f.nome).indexOf(q) >= 0; }), function (f) {
+        return '<li class="item"><div class="meta"><span>' + fornecedor(f.nome, f.pf) + '</span></div><p><b class="num">' + reaisExato(f.pago) + "</b> <span class=\"pequeno\">(" + (Math.round(1000 * f.pago / Math.max(total, 1)) / 10).toLocaleString("pt-BR") + "% do total)</span></p></li>";
+      }, 15);
+    }
+    qF.addEventListener("input", filtrarForn); filtrarForn();
+
+    if (A.eventos) {
+      paginada(document.getElementById("listaEventos"), ev, function (e) {
+        return '<li class="item"><div class="meta"><span>' + br(e.data) + "</span><span>" + esc(NOMES_EVENTO[e.grupo]) + "</span><span>" + esc(e.modalidade) + "</span></div><p><b class=\"num\">" + reaisExato(e.valor) + "</b> · " + fornecedor(e.fornecedor, e.pf) + "</p><p class=\"pequeno\">" + esc(e.historico) + "</p></li>";
+      }, 8);
+    } else {
+      var evp = D.eventos_pncp.filter(function (e) { return e.data.slice(0, 4) === estado.ano; });
+      paginada(document.getElementById("listaEventos"), evp, itemDireta, 8);
+    }
+
+    var tipoContr = "contratos";
+    document.getElementById("abaContr").onclick = function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      tipoContr = b.getAttribute("data-v");
+      [].forEach.call(this.querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", x === b); });
+      filtrarContr();
+    };
+    var qC = document.getElementById("qContr");
+    function filtrarContr() {
+      var q = norm(qC.value);
+      var base = tipoContr === "contratos" ? D.contratos : D.diretas.filter(function (d) { return d.modalidade === tipoContr; });
+      var lista = base.filter(function (c) { return !q || norm(c.objeto + " " + (c.fornecedor || "")).indexOf(q) >= 0; });
+      if (!base.length) {
+        document.getElementById("resContr").innerHTML = "";
+        document.getElementById("listaContr").innerHTML = '<p class="vazio">Os dados do PNCP ainda não foram coletados nesta versão. Rode <code>python coleta_gastos.py</code>.</p>';
+        return;
+      }
+      var soma = lista.reduce(function (s, c) { return s + (c.valor || 0); }, 0);
+      document.getElementById("resContr").innerHTML = "<b class=\"num\">" + lista.length.toLocaleString("pt-BR") + "</b> itens · " + reais(soma) + " em valor " + (tipoContr === "contratos" ? "contratado" : "estimado ou homologado");
+      paginada(document.getElementById("listaContr"), lista, tipoContr === "contratos" ? itemContrato : itemDireta, 10);
+    }
+    var tC; qC.addEventListener("input", function () { clearTimeout(tC); tC = setTimeout(filtrarContr, 200); });
+    filtrarContr();
+  }
+  function itemContrato(c) {
+    return '<li class="item"><div class="meta"><a href="' + esc(c.link) + '" target="_blank" rel="noopener">' + br(c.data) + "</a><span>" + esc(c.tipo) + "</span></div><p><b class=\"num\">" + reaisExato(c.valor) + "</b> · " + fornecedor(c.fornecedor, c.pf) + "</p><p class=\"pequeno\">" + esc(c.objeto) + "</p></li>";
+  }
+  function itemDireta(c) {
+    return '<li class="item"><div class="meta"><a href="' + esc(c.link) + '" target="_blank" rel="noopener">' + br(c.data) + "</a><span>" + esc(c.modalidade) + "</span><span>" + esc(c.amparo) + "</span></div><p><b class=\"num\">" + reaisExato(c.valor) + "</b></p><p class=\"pequeno\">" + esc(c.objeto) + "</p></li>";
+  }
+  desenhar();
+})();
+</script>
+</body>
+</html>

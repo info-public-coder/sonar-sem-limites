@@ -1,0 +1,249 @@
+{
+ "publicada_em": "2026-05-11",
+ "fonte": "https://www.transparencia.sp.gov.br/PortalTransparencia-Report/Remuneracao.aspx",
+ "linhas_seduc": 239801,
+ "homonimos": {
+  "Renata Souza Silva": [
+   "RENATA DA SILVA",
+   "RENATA SOUZA DA SILVA",
+   "RENATA SOUZA SILVA"
+  ]
+ },
+ "equipe": {
+  "Alexandre Augusto Castro de Souza Freitas": [
+   {
+    "cargo": "SUPERVISOR DE ENSINO",
+    "remuneracao": 8672.63,
+    "ferias_13": 0.0,
+    "eventuais": 9229.03,
+    "licenca_premio": 0.0,
+    "indenizacoes": 1389.23,
+    "redutor": 0.0,
+    "liquido": 11185.02,
+    "nome_folha": "ALEXANDRE AUGUSTO C S FREITAS"
+   }
+  ],
+  "Ana Paula Gutierres Oyama": [
+   {
+    "cargo": "EXECUTIVO PUBLICO",
+    "remuneracao": 7635.18,
+    "ferias_13": 0.0,
+    "eventuais": 7372.3,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 10734.52,
+    "nome_folha": "ANA PAULA GUTIERRES OYAMA"
+   }
+  ],
+  "Carla Maria de Lara Campos Dorini Angelici": [
+   {
+    "cargo": "PROFESSOR EDUCACAO BASICA II",
+    "remuneracao": 6580.66,
+    "ferias_13": 1096.78,
+    "eventuais": 5303.67,
+    "licenca_premio": 0.0,
+    "indenizacoes": -59.46,
+    "redutor": 0.0,
+    "liquido": 7531.06,
+    "nome_folha": "CARLA MARIA LARA C D ANGELICI"
+   }
+  ],
+  "Elisângela Francisco Radighieri": [
+   {
+    "cargo": "FCESP 1.05-CHEFE DE SECAO",
+    "remuneracao": 7830.53,
+    "ferias_13": 3915.26,
+    "eventuais": 0.0,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 8881.07,
+    "nome_folha": "ELISANGELA F RADIGHIERI"
+   }
+  ],
+  "Gabriel Prochnou Vieira": [
+   {
+    "cargo": "SUPERVISOR DE ENSINO",
+    "remuneracao": 7893.43,
+    "ferias_13": 0.0,
+    "eventuais": 21171.44,
+    "licenca_premio": 0.0,
+    "indenizacoes": 1389.23,
+    "redutor": 0.0,
+    "liquido": 21605.83,
+    "nome_folha": "GABRIEL PROCHNOU VIEIRA"
+   }
+  ],
+  "Joice Maria de Luca Rodrigues": [
+   {
+    "cargo": "PROFESSOR EDUCACAO BASICA II",
+    "remuneracao": 7519.25,
+    "ferias_13": 3860.38,
+    "eventuais": 10381.07,
+    "licenca_premio": 0.0,
+    "indenizacoes": 754.24,
+    "redutor": 0.0,
+    "liquido": 16188.62,
+    "nome_folha": "JOICE MARIA DE LUCA RODRIGUES"
+   }
+  ],
+  "Ligia Aparecida Dorigo Roder": [
+   {
+    "cargo": "CCESP 1.08-CHEFE DE SERVICO",
+    "remuneracao": 12353.07,
+    "ferias_13": 0.0,
+    "eventuais": 10459.43,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 15997.25,
+    "nome_folha": "LIGIA APARECIDA DORIGO RODER"
+   }
+  ],
+  "Luciana Silva de Mello": [
+   {
+    "cargo": "CCESP 1.08-CHEFE DE SERVICO",
+    "remuneracao": 12475.33,
+    "ferias_13": 0.0,
+    "eventuais": 0.0,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 7824.83,
+    "nome_folha": "LUCIANA SILVA DE MELLO"
+   }
+  ],
+  "Nilcéia Maria Arantes Marteline": [
+   {
+    "cargo": "SUPERVISOR DE ENSINO",
+    "remuneracao": 14483.41,
+    "ferias_13": 0.0,
+    "eventuais": 12336.1,
+    "licenca_premio": 0.0,
+    "indenizacoes": 3152.44,
+    "redutor": 0.0,
+    "liquido": 17002.71,
+    "nome_folha": "NILCEIA MARIA A MARTELINE"
+   }
+  ],
+  "Reggis Miquéias Marcondes Rosa": [
+   {
+    "cargo": "EXECUTIVO PUBLICO",
+    "remuneracao": 7154.15,
+    "ferias_13": 2271.5,
+    "eventuais": 27840.83,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 27723.79,
+    "nome_folha": "REGGIS MIQUEIAS MARCONDES ROSA"
+   }
+  ],
+  "Rosely Fátima Freitas Cezaretto": [
+   {
+    "cargo": "DIRETOR DE ESCOLA",
+    "remuneracao": 15348.56,
+    "ferias_13": 1007.89,
+    "eventuais": 13125.14,
+    "licenca_premio": 0.0,
+    "indenizacoes": 9132.04,
+    "redutor": 0.0,
+    "liquido": 29720.2,
+    "nome_folha": "ROSELY FATIMA F CEZARETTO"
+   }
+  ],
+  "Silmara Ribeiro de Almeida Souza": [
+   {
+    "cargo": "PROFESSOR EDUCACAO BASICA II",
+    "remuneracao": 7182.89,
+    "ferias_13": 122.67,
+    "eventuais": 7323.17,
+    "licenca_premio": 0.0,
+    "indenizacoes": 2196.27,
+    "redutor": 0.0,
+    "liquido": 12263.49,
+    "nome_folha": "SILMARA RIBEIRO ALMEIDA SOUZA"
+   }
+  ],
+  "Tatiana de Almeida Furlani": [
+   {
+    "cargo": "EXECUTIVO PUBLICO",
+    "remuneracao": 7752.46,
+    "ferias_13": 0.0,
+    "eventuais": 7396.51,
+    "licenca_premio": 0.0,
+    "indenizacoes": 0.0,
+    "redutor": 0.0,
+    "liquido": 10822.37,
+    "nome_folha": "TATIANA DE ALMEIDA FURLANI"
+   }
+  ]
+ },
+ "medianas": {
+  "PROFENSINOFUNDAMENTALMEDIO": {
+   "mediana": 5839.04,
+   "n": 105320
+  },
+  "AGENTEDEORGANIZACAOESCOLAR": {
+   "mediana": 3078.15,
+   "n": 30855
+  },
+  "PROFESSOREDUCACAOBASICAII": {
+   "mediana": 6613.8,
+   "n": 73278
+  },
+  "PROFESSOREDUCACAOBASICAI": {
+   "mediana": 5412.42,
+   "n": 14010
+  },
+  "DIRETORDEESCOLA": {
+   "mediana": 11592.25,
+   "n": 2855
+  },
+  "CCESP105CHEFEDESECAO": {
+   "mediana": 5932.0,
+   "n": 211
+  },
+  "OFICIALADMINISTRATIVO": {
+   "mediana": 3082.85,
+   "n": 629
+  },
+  "SUPERVISOREDUCACIONAL": {
+   "mediana": 9237.9,
+   "n": 544
+  },
+  "SUPERVISORDEENSINO": {
+   "mediana": 11986.58,
+   "n": 990
+  },
+  "FCESP105CHEFEDESECAO": {
+   "mediana": 7086.02,
+   "n": 493
+  },
+  "EXECUTIVOPUBLICO": {
+   "mediana": 6642.33,
+   "n": 127
+  },
+  "ANALISTAADMINISTRATIVO": {
+   "mediana": 3879.48,
+   "n": 115
+  },
+  "CCESP202ASSISTENTEII": {
+   "mediana": 3707.5,
+   "n": 160
+  },
+  "FCESP114COORDENADORGERAL": {
+   "mediana": 20292.56,
+   "n": 31
+  },
+  "CCESP108CHEFEDESERVICO": {
+   "mediana": 8156.5,
+   "n": 99
+  },
+  "CCESP201ASSISTENTEI": {
+   "mediana": 2966.0,
+   "n": 57
+  }
+ }
+}

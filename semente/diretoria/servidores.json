@@ -1,0 +1,661 @@
+{
+ "mes": "2026-10",
+ "fonte": "https://dados.educacao.sp.gov.br/dataset/servidores-ativos-por-unidade",
+ "arquivo": "Base%20Servidores%20Ativos%201026.csv",
+ "sede": 123,
+ "escolas": 3537,
+ "por_cargo": [
+  [
+   "PROFESSOR EDUCACAO BASICA II",
+   40,
+   "PROFESSOREDUCACAOBASICAII"
+  ],
+  [
+   "SUPERVISOR DE ENSINO",
+   26,
+   "SUPERVISORDEENSINO"
+  ],
+  [
+   "PROFESSOR DE ENSINO FUNDAMENTAL E MEDIO",
+   9,
+   "PROFENSINOFUNDAMENTALMEDIO"
+  ],
+  [
+   "PROFESSOR EDUCACAO BASICA I",
+   9,
+   "PROFESSOREDUCACAOBASICAI"
+  ],
+  [
+   "OFICIAL ADMINISTRATIVO",
+   9,
+   "OFICIALADMINISTRATIVO"
+  ],
+  [
+   "CCESP 1.08 - CHEFE DE SERVIÇO",
+   5,
+   "CCESP108CHEFEDESERVICO"
+  ],
+  [
+   "FCESP 1.05 - CHEFE DE SEÇÃO",
+   5,
+   "FCESP105CHEFEDESECAO"
+  ],
+  [
+   "DIRETOR DE ESCOLA",
+   4,
+   "DIRETORDEESCOLA"
+  ],
+  [
+   "PROFESSOR EDUCAÇÃO BASICA I",
+   3,
+   "PROFESSOREDUCACAOBASICAI"
+  ],
+  [
+   "CCESP 1.05 - CHEFE DE SEÇÃO",
+   3,
+   "CCESP105CHEFEDESECAO"
+  ],
+  [
+   "EXECUTIVO PUBLICO",
+   3,
+   "EXECUTIVOPUBLICO"
+  ],
+  [
+   "ANALISTA  ADMINISTRATIVO",
+   2,
+   "ANALISTAADMINISTRATIVO"
+  ],
+  [
+   "FCESP 1.14 - COORDENADOR GERAL",
+   1,
+   "FCESP114COORDENADORGERAL"
+  ],
+  [
+   "AGENTE DE ORGANIZACAO ESCOLAR",
+   1,
+   "AGENTEDEORGANIZACAOESCOLAR"
+  ],
+  [
+   "SUPERVISOR EDUCACIONAL",
+   1,
+   "SUPERVISOREDUCACIONAL"
+  ],
+  [
+   "CCESP 2.02 - ASSISTENTE II",
+   1,
+   "CCESP202ASSISTENTEII"
+  ],
+  [
+   "CCESP 2.01 - ASSISTENTE I",
+   1,
+   "CCESP201ASSISTENTEI"
+  ]
+ ],
+ "quadro": {
+  "QM": 93,
+  "QSE": 29,
+  "QAE": 1
+ },
+ "sedes": {
+  "URE TAUBATE": {
+   "n": 85,
+   "ua": [
+    "39647"
+   ]
+  },
+  "URE ITAPETININGA": {
+   "n": 94,
+   "ua": [
+    "39657"
+   ]
+  },
+  "URE ITARARE": {
+   "n": 59,
+   "ua": [
+    "81356"
+   ]
+  },
+  "URE SUL 2": {
+   "n": 112,
+   "ua": [
+    "23852"
+   ]
+  },
+  "URE CAMPINAS OESTE": {
+   "n": 127,
+   "ua": [
+    "23855"
+   ]
+  },
+  "URE GUARULHOS NORTE": {
+   "n": 128,
+   "ua": [
+    "39619"
+   ]
+  },
+  "URE MAUA": {
+   "n": 121,
+   "ua": [
+    "39626"
+   ]
+  },
+  "URE LINS": {
+   "n": 63,
+   "ua": [
+    "39691"
+   ]
+  },
+  "URE CAMPINAS LESTE": {
+   "n": 89,
+   "ua": [
+    "23854"
+   ]
+  },
+  "URE JUNDIAI": {
+   "n": 86,
+   "ua": [
+    "39669"
+   ]
+  },
+  "URE MOGI MIRIM": {
+   "n": 93,
+   "ua": [
+    "39668"
+   ]
+  },
+  "URE CENTRO": {
+   "n": 101,
+   "ua": [
+    "23841"
+   ]
+  },
+  "URE JACAREI": {
+   "n": 111,
+   "ua": [
+    "67421"
+   ]
+  },
+  "URE RIBEIRAO PRETO": {
+   "n": 128,
+   "ua": [
+    "39676"
+   ]
+  },
+  "URE BRAGANCA PAULISTA": {
+   "n": 98,
+   "ua": [
+    "39670"
+   ]
+  },
+  "URE ITAPEVA": {
+   "n": 54,
+   "ua": [
+    "39658"
+   ]
+  },
+  "URE AMERICANA": {
+   "n": 105,
+   "ua": [
+    "39666"
+   ]
+  },
+  "URE ITAPECERICA DA SERRA": {
+   "n": 82,
+   "ua": [
+    "39635"
+   ]
+  },
+  "URE VOTORANTIM": {
+   "n": 62,
+   "ua": [
+    "39653"
+   ]
+  },
+  "URE SANTO ANDRE": {
+   "n": 104,
+   "ua": [
+    "39629"
+   ]
+  },
+  "URE NORTE 1": {
+   "n": 128,
+   "ua": [
+    "23849"
+   ]
+  },
+  "URE CENTRO SUL": {
+   "n": 108,
+   "ua": [
+    "23843"
+   ]
+  },
+  "URE LESTE 3": {
+   "n": 104,
+   "ua": [
+    "23846"
+   ]
+  },
+  "URE LESTE 4": {
+   "n": 118,
+   "ua": [
+    "23847"
+   ]
+  },
+  "URE JALES": {
+   "n": 60,
+   "ua": [
+    "39694"
+   ]
+  },
+  "URE ARACATUBA": {
+   "n": 73,
+   "ua": [
+    "39706"
+   ]
+  },
+  "URE SUZANO": {
+   "n": 107,
+   "ua": [
+    "39621"
+   ]
+  },
+  "URE LESTE 1": {
+   "n": 125,
+   "ua": [
+    "23844"
+   ]
+  },
+  "URE SAO ROQUE": {
+   "n": 67,
+   "ua": [
+    "39656"
+   ]
+  },
+  "URE REGISTRO": {
+   "n": 78,
+   "ua": [
+    "39727"
+   ]
+  },
+  "URE SAO JOSE DO RIO PRETO": {
+   "n": 91,
+   "ua": [
+    "39697"
+   ]
+  },
+  "URE SANTOS": {
+   "n": 98,
+   "ua": [
+    "39640"
+   ]
+  },
+  "URE ASSIS": {
+   "n": 70,
+   "ua": [
+    "39724"
+   ]
+  },
+  "URE MARILIA": {
+   "n": 96,
+   "ua": [
+    "39720"
+   ]
+  },
+  "URE CARAPICUIBA": {
+   "n": 101,
+   "ua": [
+    "39634"
+   ]
+  },
+  "URE APIAI": {
+   "n": 57,
+   "ua": [
+    "39661"
+   ]
+  },
+  "URE DIADEMA": {
+   "n": 77,
+   "ua": [
+    "39624"
+   ]
+  },
+  "URE SAO JOSE DOS CAMPOS": {
+   "n": 95,
+   "ua": [
+    "77753"
+   ]
+  },
+  "URE ITAPEVI": {
+   "n": 76,
+   "ua": [
+    "39633"
+   ]
+  },
+  "URE TABOAO DA SERRA": {
+   "n": 97,
+   "ua": [
+    "75852"
+   ]
+  },
+  "URE LESTE 2": {
+   "n": 121,
+   "ua": [
+    "23845"
+   ]
+  },
+  "URE CENTRO OESTE": {
+   "n": 108,
+   "ua": [
+    "23842"
+   ]
+  },
+  "URE SANTO ANASTACIO": {
+   "n": 56,
+   "ua": [
+    "39713"
+   ]
+  },
+  "URE CAPIVARI": {
+   "n": 58,
+   "ua": [
+    "84850"
+   ]
+  },
+  "URE OSASCO": {
+   "n": 80,
+   "ua": [
+    "39632"
+   ]
+  },
+  "URE SAO BERNARDO DO CAMPO": {
+   "n": 109,
+   "ua": [
+    "39628"
+   ]
+  },
+  "URE NORTE 2": {
+   "n": 101,
+   "ua": [
+    "23850"
+   ]
+  },
+  "URE PIRASSUNUNGA": {
+   "n": 80,
+   "ua": [
+    "39673"
+   ]
+  },
+  "URE ANDRADINA": {
+   "n": 57,
+   "ua": [
+    "39705"
+   ]
+  },
+  "URE ARARAQUARA": {
+   "n": 95,
+   "ua": [
+    "39682"
+   ]
+  },
+  "URE PRESIDENTE PRUDENTE": {
+   "n": 85,
+   "ua": [
+    "39718"
+   ]
+  },
+  "URE AVARE": {
+   "n": 69,
+   "ua": [
+    "28374"
+   ]
+  },
+  "URE SAO VICENTE": {
+   "n": 111,
+   "ua": [
+    "39642"
+   ]
+  },
+  "URE SAO JOAO DA BOA VISTA": {
+   "n": 95,
+   "ua": [
+    "45988"
+   ]
+  },
+  "URE SUMARE": {
+   "n": 91,
+   "ua": [
+    "71535"
+   ]
+  },
+  "URE MIRACATU": {
+   "n": 66,
+   "ua": [
+    "39728"
+   ]
+  },
+  "URE SUL 3": {
+   "n": 113,
+   "ua": [
+    "23853",
+    "24058"
+   ]
+  },
+  "URE LIMEIRA": {
+   "n": 94,
+   "ua": [
+    "39674"
+   ]
+  },
+  "URE TUPA": {
+   "n": 69,
+   "ua": [
+    "39725"
+   ]
+  },
+  "URE MOGI DAS CRUZES": {
+   "n": 93,
+   "ua": [
+    "39622"
+   ]
+  },
+  "URE SAO JOAQUIM DA BARRA": {
+   "n": 44,
+   "ua": [
+    "39678"
+   ]
+  },
+  "URE JOSE BONIFACIO": {
+   "n": 57,
+   "ua": [
+    "39699"
+   ]
+  },
+  "URE ITU": {
+   "n": 81,
+   "ua": [
+    "39654"
+   ]
+  },
+  "URE FRANCA": {
+   "n": 98,
+   "ua": [
+    "39679"
+   ]
+  },
+  "URE BAURU": {
+   "n": 123,
+   "ua": [
+    "39688"
+   ]
+  },
+  "URE FERNANDOPOLIS": {
+   "n": 58,
+   "ua": [
+    "39695"
+   ]
+  },
+  "URE JAU": {
+   "n": 80,
+   "ua": [
+    "39690"
+   ]
+  },
+  "URE SOROCABA": {
+   "n": 111,
+   "ua": [
+    "77786"
+   ]
+  },
+  "URE PIRACICABA": {
+   "n": 108,
+   "ua": [
+    "39671"
+   ]
+  },
+  "URE PINDAMONHANGABA": {
+   "n": 86,
+   "ua": [
+    "39646"
+   ]
+  },
+  "URE GUARATINGUETA": {
+   "n": 103,
+   "ua": [
+    "39648"
+   ]
+  },
+  "URE LESTE 5": {
+   "n": 104,
+   "ua": [
+    "23848"
+   ]
+  },
+  "URE SERTAOZINHO": {
+   "n": 59,
+   "ua": [
+    "67475"
+   ]
+  },
+  "URE VOTUPORANGA": {
+   "n": 62,
+   "ua": [
+    "39696"
+   ]
+  },
+  "URE CATANDUVA": {
+   "n": 42,
+   "ua": [
+    "39700"
+   ]
+  },
+  "URE OURINHOS": {
+   "n": 63,
+   "ua": [
+    "39722"
+   ]
+  },
+  "URE JABOTICABAL": {
+   "n": 55,
+   "ua": [
+    "39685"
+   ]
+  },
+  "URE GUARULHOS SUL": {
+   "n": 114,
+   "ua": [
+    "39618"
+   ]
+  },
+  "URE CARAGUATATUBA": {
+   "n": 69,
+   "ua": [
+    "39643"
+   ]
+  },
+  "URE BOTUCATU": {
+   "n": 67,
+   "ua": [
+    "39660"
+   ]
+  },
+  "URE SUL 1": {
+   "n": 108,
+   "ua": [
+    "23851"
+   ]
+  },
+  "URE SAO CARLOS": {
+   "n": 78,
+   "ua": [
+    "39684"
+   ]
+  },
+  "URE CAIEIRAS": {
+   "n": 88,
+   "ua": [
+    "39617"
+   ]
+  },
+  "URE MIRANTE DO PARANAPANEMA": {
+   "n": 54,
+   "ua": [
+    "71537"
+   ]
+  },
+  "URE ITAQUAQUECETUBA": {
+   "n": 84,
+   "ua": [
+    "71532"
+   ]
+  },
+  "URE BARRETOS": {
+   "n": 55,
+   "ua": [
+    "39681"
+   ]
+  },
+  "URE ADAMANTINA": {
+   "n": 62,
+   "ua": [
+    "39711"
+   ]
+  },
+  "URE TAQUARITINGA": {
+   "n": 66,
+   "ua": [
+    "39683"
+   ]
+  },
+  "URE PIRAJU": {
+   "n": 46,
+   "ua": [
+    "75853"
+   ]
+  },
+  "URE PENAPOLIS": {
+   "n": 49,
+   "ua": [
+    "91854"
+   ]
+  },
+  "URE BIRIGUI": {
+   "n": 55,
+   "ua": [
+    "39708"
+   ]
+  },
+  "CENTRO DE INFORMACOES EDUCACIONAIS E GESTAO DA REDE ESCOLAR": {
+   "n": 2,
+   "ua": [
+    "24024",
+    "24062"
+   ]
+  },
+  "CENTRO DE ADMINISTRACAO FINANCAS E INFRAESTRUTURA": {
+   "n": 1,
+   "ua": [
+    "24067"
+   ]
+  }
+ }
+}

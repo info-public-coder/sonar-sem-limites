@@ -43,6 +43,12 @@ jobs:
           restore-keys: |
             dados-
 
+      - name: Completar com a semente o que faltar (fontes que recusam o GitHub)
+        run: |
+          mkdir -p dados
+          cp -rn semente/prefeitura semente/diretoria dados/ 2>/dev/null || true
+          ls -R dados/prefeitura dados/diretoria | head -20
+
       - name: Arquivo anual do TCE-SP (so se ainda nao existir; ~2 GB lidos em fluxo)
         run: |
           ANO=$(( $(date +%Y) - 1 ))

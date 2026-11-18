@@ -58,7 +58,31 @@ def main():
         print("  (Camara sem coleta nova: o site mostra a ultima coleta boa. Se for bloqueio de rede,"
               " conecte o PC no roteador do celular e rode de novo.)")
     obrigatorios = ("gerar_site.py", "gerar_dinheiro.py", "gerar_prefeitura.py", "gerar_diretoria.py", "verificar_site.py")
-    return 1 if any(resultado.get(s) for s in obrigatorios) else 0
+    falhou = any(resultado.get(s) for s in obrigatorios)
+    if not falhou and not os.environ.get("GITHUB_ACTIONS"):
+        renovar_semente()
+    return 1 if falhou else 0
+
+
+# Fontes que recusam os servidores do GitHub: a copia processada vai para
+# semente/, que o robo usa quando a coleta de la falha (ver semente/LEIA-ME.md).
+SEMENTE = {
+    "prefeitura": ["equipe.json"],
+    "diretoria": ["equipe.json", "folha.json", "servidores.json", "pagamentos.json", "pncp.json"],
+}
+
+
+def renovar_semente():
+    import shutil
+    copiados = 0
+    for pasta, arquivos in SEMENTE.items():
+        os.makedirs(os.path.join(RAIZ, "semente", pasta), exist_ok=True)
+        for nome in arquivos:
+            origem = os.path.join(RAIZ, "dados", pasta, nome)
+            if os.path.exists(origem):
+                shutil.copy2(origem, os.path.join(RAIZ, "semente", pasta, nome))
+                copiados += 1
+    print(f"  semente/ renovada ({copiados} arquivos). Envie para o GitHub para o robo usar.")
 
 
 if __name__ == "__main__":

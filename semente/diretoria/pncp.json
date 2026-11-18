@@ -1,0 +1,608 @@
+{
+ "fonte": "https://pncp.gov.br/app/",
+ "ug": "080297",
+ "contratos": [
+  {
+   "numeroControlePNCP": "46384111000140-2-000997/2025",
+   "numeroControlePncpCompra": "46384111000140-1-000427/2025",
+   "niFornecedor": "11095047000100",
+   "nomeRazaoSocialFornecedor": "ROGERIO EVORA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 9633.84,
+   "objetoContrato": "AQUISIÇÃO DE MEDALHAS PARA PREMIAÇÃO DOS JOGOS JEESP.",
+   "dataAssinatura": "2025-04-08",
+   "dataVigenciaFim": "2030-04-08"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-000998/2025",
+   "numeroControlePncpCompra": "46384111000140-1-000494/2025",
+   "niFornecedor": "28926250000176",
+   "nomeRazaoSocialFornecedor": "PRISMA COMERCIO DE MOVEIS E EQUIPAMENTOS LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 10350.0,
+   "objetoContrato": "AQUISIÇÃO DE CADEIRAS REFORÇADAS PLUS SIZE",
+   "dataAssinatura": "2025-04-08",
+   "dataVigenciaFim": "2030-04-08"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-000999/2025",
+   "numeroControlePncpCompra": "46384111000140-1-000512/2025",
+   "niFornecedor": "49495719000130",
+   "nomeRazaoSocialFornecedor": "RI EMPREENDIMENTO COMERCIAL LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2033.1,
+   "objetoContrato": "AQUISIÇÃO DE VENTILADORES DE COLUNA",
+   "dataAssinatura": "2025-04-15",
+   "dataVigenciaFim": "2025-04-25"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001000/2025",
+   "numeroControlePncpCompra": "46384111000140-1-000808/2024",
+   "niFornecedor": "21706616000152",
+   "nomeRazaoSocialFornecedor": "RODRIGO GODOY LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 22234473.0,
+   "objetoContrato": "PRESTAÇÃO DE SERVIÇOS CONTÍNUOS DE LIMPEZA, ASSEIO E CONSERVAÇÃO PREDIAL",
+   "dataAssinatura": "2025-08-18",
+   "dataVigenciaFim": "2027-11-17"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001005/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000918/2024",
+   "niFornecedor": "32110552000149",
+   "nomeRazaoSocialFornecedor": "NOVA BRASIL LICITACOES LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 5666.04,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL PERMANENTE PARA AS ESCOLAS",
+   "dataAssinatura": "2024-09-19",
+   "dataVigenciaFim": "2029-09-19"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001006/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000918/2024",
+   "niFornecedor": "52217971000191",
+   "nomeRazaoSocialFornecedor": "SUPRI SOLUTIONS DISTRIBUIDORA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2794.44,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL PERMANENTE PARA ESCOLAS",
+   "dataAssinatura": "2024-09-19",
+   "dataVigenciaFim": "2029-09-19"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001007/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000540/2024",
+   "niFornecedor": "52065352000129",
+   "nomeRazaoSocialFornecedor": "RTSP COMERCIAL LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 800.8,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ÓLEO DE SOJA PARA ATENDER À RETOMADA DAS AULAS DAS UNIDADES EE SENADOR RODOLFO MIRANDA E ETEC ASTOR DE MATTOS CARVALHO",
+   "dataAssinatura": "2024-08-06",
+   "dataVigenciaFim": "2029-08-06"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001008/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "12758923000196",
+   "nomeRazaoSocialFornecedor": "L C ARAUJO & CIA EMBALAGENS LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2272.4,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE HIGIENE E LIMPEZA PARA AS UES SEM APM",
+   "dataAssinatura": "2024-05-10",
+   "dataVigenciaFim": "2029-05-10"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001009/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "26690808000131",
+   "nomeRazaoSocialFornecedor": "IRINEU VALENTIM TONELOTTO",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1684.06,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGINE PARA ESCOLAS SEM APM",
+   "dataAssinatura": "2024-05-10",
+   "dataVigenciaFim": "2029-05-10"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001010/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "02403262000122",
+   "nomeRazaoSocialFornecedor": "BELLIMP COMERCIO DE PRODUTOS DE HIGIENE E LIMPEZA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 539.4,
+   "objetoContrato": "AQUISIÇÃO DE ITENS DE HIGIENE E LIMPEZA PARA AS ESCOLAS SEM APM",
+   "dataAssinatura": "2024-05-09",
+   "dataVigenciaFim": "2029-05-09"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001011/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "02403262000122",
+   "nomeRazaoSocialFornecedor": "BELLIMP COMERCIO DE PRODUTOS DE HIGIENE E LIMPEZA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 750.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE HIGIENE E LIMPEZA PARA AS ESCOLAS SEM APM",
+   "dataAssinatura": "2024-05-09",
+   "dataVigenciaFim": "2029-05-09"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001012/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "05971158000122",
+   "nomeRazaoSocialFornecedor": "INDUSTRIA E COMERCIO DE PRODUTOS DE LIMPEZA MACATUBA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1626.8,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE HIGIENE E LIMPEZA PARA AS ESCOLAS SEM APM",
+   "dataAssinatura": "2024-05-09",
+   "dataVigenciaFim": "2029-05-09"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001013/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000130/2024",
+   "niFornecedor": "45341795000130",
+   "nomeRazaoSocialFornecedor": "OSWALDO DOS SANTOS FLORENCIO",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 8160.4,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE HIGIENE E LIMPEZA PARA AS ESCOLAS SEM APM",
+   "dataAssinatura": "2024-05-09",
+   "dataVigenciaFim": "2029-05-09"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001014/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000221/2024",
+   "niFornecedor": "05971158000122",
+   "nomeRazaoSocialFornecedor": "INDUSTRIA E COMERCIO DE PRODUTOS DE LIMPEZA MACATUBA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1584.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAIS DE HIGIENE E CONSUMO PARA UES SEM APM",
+   "dataAssinatura": "2024-05-28",
+   "dataVigenciaFim": "2029-05-28"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001015/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000075/2024",
+   "niFornecedor": "08621769000139",
+   "nomeRazaoSocialFornecedor": "IMPERIO SERVICOS E CONSULTORIA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 866.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - GENEROS ALIMENTÍCIOS",
+   "dataAssinatura": "2024-05-14",
+   "dataVigenciaFim": "2029-05-14"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001016/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000069/2024",
+   "niFornecedor": "51384258000170",
+   "nomeRazaoSocialFornecedor": "BIOFLEXX INDUSTRIAL E COMERCIAL LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 3242.4,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO BAURU",
+   "dataAssinatura": "2024-03-22",
+   "dataVigenciaFim": "2029-03-22"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001017/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000002/2024",
+   "niFornecedor": "02403262000122",
+   "nomeRazaoSocialFornecedor": "BELLIMP COMERCIO DE PRODUTOS DE HIGIENE E LIMPEZA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1327.08,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO DE BAURU",
+   "dataAssinatura": "2024-03-22",
+   "dataVigenciaFim": "2029-03-22"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001018/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000002/2024",
+   "niFornecedor": "02403262000122",
+   "nomeRazaoSocialFornecedor": "BELLIMP COMERCIO DE PRODUTOS DE HIGIENE E LIMPEZA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 218.04,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO BAURU",
+   "dataAssinatura": "2024-03-22",
+   "dataVigenciaFim": "2029-03-22"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001019/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000002/2024",
+   "niFornecedor": "54111088000148",
+   "nomeRazaoSocialFornecedor": "POLLON COMERCIO E ENGENHARIA LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2560.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO DE BAURU",
+   "dataAssinatura": "2024-03-28",
+   "dataVigenciaFim": "2029-03-28"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001020/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000002/2024",
+   "niFornecedor": "51662031000149",
+   "nomeRazaoSocialFornecedor": "51.662.031 OTAVIO FELIPE ALVES PASSOS",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 261.6,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO DE BAURU",
+   "dataAssinatura": "2024-03-28",
+   "dataVigenciaFim": "2029-03-28"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001021/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000002/2024",
+   "niFornecedor": "51384258000170",
+   "nomeRazaoSocialFornecedor": "BIOFLEXX INDUSTRIAL E COMERCIAL LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 10173.39,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA A DIRETORIA DE ENSINO BAURU",
+   "dataAssinatura": "2024-04-10",
+   "dataVigenciaFim": "2029-04-10"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001022/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000028/2024",
+   "niFornecedor": "51384258000170",
+   "nomeRazaoSocialFornecedor": "BIOFLEXX INDUSTRIAL E COMERCIAL LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1044.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS DE HIGIENE PARA DIRETORIA DE ENSINO BAURU",
+   "dataAssinatura": "2024-04-22",
+   "dataVigenciaFim": "2029-04-22"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001023/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000065/2024",
+   "niFornecedor": "11095047000100",
+   "nomeRazaoSocialFornecedor": "ROGERIO EVORA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 1770.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - MEDALHAS",
+   "dataAssinatura": "2024-04-29",
+   "dataVigenciaFim": "2029-04-29"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001024/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000065/2024",
+   "niFornecedor": "54321597000103",
+   "nomeRazaoSocialFornecedor": "GH SOLUCOES EMPRESARIAIS LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2652.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - MEDALHAS",
+   "dataAssinatura": "2024-04-30",
+   "dataVigenciaFim": "2029-04-30"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001025/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000066/2024",
+   "niFornecedor": "39897270000182",
+   "nomeRazaoSocialFornecedor": "MARCELA MACHADO ZAMBON LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 2486.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO -ITENS ESPORTIVOS",
+   "dataAssinatura": "2024-05-14",
+   "dataVigenciaFim": "2029-05-14"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001026/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000066/2024",
+   "niFornecedor": "30960599000176",
+   "nomeRazaoSocialFornecedor": "30.960.599 HELAINE RODRIGUES ROCHA LIMA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 839.6,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS ESPORTIVOS",
+   "dataAssinatura": "2024-04-30",
+   "dataVigenciaFim": "2029-04-30"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001027/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000066/2024",
+   "niFornecedor": "20056269000105",
+   "nomeRazaoSocialFornecedor": "MDIGITAL MULTISERVICOS LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 425.0,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS ESPORTIVOS",
+   "dataAssinatura": "2024-04-30",
+   "dataVigenciaFim": "2029-04-30"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001028/2024",
+   "numeroControlePncpCompra": "46384111000140-1-000066/2024",
+   "niFornecedor": "14163479000191",
+   "nomeRazaoSocialFornecedor": "EXITUS COMERCIAL PRODUTOS E SERVICOS LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 364.45,
+   "objetoContrato": "AQUISIÇÃO DE MATERIAL DE CONSUMO - ITENS ESPORTIVOS",
+   "dataAssinatura": "2024-04-30",
+   "dataVigenciaFim": "2029-04-30"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001564/2025",
+   "numeroControlePncpCompra": "46384111000140-1-001580/2025",
+   "niFornecedor": "14564689000191",
+   "nomeRazaoSocialFornecedor": "P Q SANTOS BUFFET",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 19389.0,
+   "objetoContrato": "AQUISIÇÃO DE KIT LANCHE PARA OLISP",
+   "dataAssinatura": "2025-12-03",
+   "dataVigenciaFim": "2026-12-08"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-000919/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 204289.76,
+   "objetoContrato": "CONTRATAÇÃO DE TRANSPORTE DE PASSAGEIROS EM CARÁTER EVENTUAL",
+   "dataAssinatura": "2026-05-21",
+   "dataVigenciaFim": "2026-06-30"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-000939/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 26293.76,
+   "objetoContrato": "TRANSPORTE DE PASSAGERIOS EM CARÁTER EVENTUAL",
+   "dataAssinatura": "2026-06-02",
+   "dataVigenciaFim": "2026-06-03"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001738/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 9277.98,
+   "objetoContrato": "TRANSPORTE EVENTUAL",
+   "dataAssinatura": "2026-09-03",
+   "dataVigenciaFim": "2026-09-04"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001739/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 29402.74,
+   "objetoContrato": "TRANSPORTE EVENTUAL - OMASP 3ª FASE",
+   "dataAssinatura": "2026-08-07",
+   "dataVigenciaFim": "2026-09-04"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001761/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 55816.41,
+   "objetoContrato": "TRANSPORTE DE PASSAGEIROS EM CARÁTER EVENTUAL",
+   "dataAssinatura": "2026-09-21",
+   "dataVigenciaFim": "2026-09-21"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001787/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 26308.31,
+   "objetoContrato": "TRANSPORTE EVENTUAL - REUNIÃO GRÊMIO",
+   "dataAssinatura": "2026-09-17",
+   "dataVigenciaFim": "2026-10-16"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001788/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 53866.04,
+   "objetoContrato": "TRANSPORTE EVENTUAL - JEESP",
+   "dataAssinatura": "2026-09-28",
+   "dataVigenciaFim": "2026-10-27"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001789/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 23616.32,
+   "objetoContrato": "TRANSPORTE EVENTUAL - JEESP",
+   "dataAssinatura": "2026-10-14",
+   "dataVigenciaFim": "2026-11-13"
+  },
+  {
+   "numeroControlePNCP": "46384111000140-2-001792/2026",
+   "numeroControlePncpCompra": "46384111000140-1-000204/2026",
+   "niFornecedor": "04173855000175",
+   "nomeRazaoSocialFornecedor": "CASTRECA TRANSPORTES E TURISMO LTDA",
+   "tipoPessoa": "PJ",
+   "valorGlobal": 22627.19,
+   "objetoContrato": "TRANSPORTE EVENTUAL - JEESP",
+   "dataAssinatura": "2026-10-06",
+   "dataVigenciaFim": "2026-11-05"
+  }
+ ],
+ "diretas": [
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000427/2025",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 9633.84,
+   "objeto": "Aquisição de medalhas aos jogos JEESP sendo elas Ouro, Prata e Bronze.",
+   "data": "2025-03-17",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000494/2025",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 10350.0,
+   "objeto": "Cadeiras giratórios reforçadas suporte de 150 a 200kg, sem braços.",
+   "data": "2025-03-25",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000512/2025",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 2033.1,
+   "objeto": "Ventiladores de coluna, com Grades Metálicas, de diâmetro mínimo de 60cm, tensão de alimentação Bivolt, potência mínima de 1500w, com chave seletora, 60hz, com regulagem de altura, com protetor térmico e mínimo de 3 pás.",
+   "data": "2025-03-31",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000710/2025",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 741.32,
+   "objeto": "Aquisição de óleo Vegetal Comestivo  tipo: puro   de soja  Garrafas de 900ml",
+   "data": "2025-05-13",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-002028/2025",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 1503.9,
+   "objeto": "Contratação de serviço de confecção de carimbos, conforme condições e exigências estabelecidas no Termo de Referência, modelos CADMAT: 320591/445574/418816/346556/350591/320594/424400/238533/376365/392438 (ref. Compras.gov) e 6436730 (ref. BEC)",
+   "data": "2026-02-05",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000943/2026",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 522.52,
+   "objeto": "Certificado Digital",
+   "data": "2026-09-03",
+   "situacao": "Divulgada no PNCP"
+  },
+  {
+   "modalidade": "Inexigibilidade",
+   "numeroControlePNCP": "46384111000140-1-001286/2026",
+   "amparo": "Lei 14.133/2021, Art. 74, caput",
+   "valor": 3138146.12,
+   "objeto": "Contratação de Serviços de fornecimento de energia elétrica para as UEs do grupo B",
+   "data": "2026-11-10",
+   "situacao": "Divulgada no PNCP"
+  }
+ ],
+ "compras_origem": {
+  "46384111000140-1-000002/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000002/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 15320.11,
+   "objeto": "Aquisição de material de conusmo- itens de higiene e limpeza para Diretoria de Ensino Região Bauru.",
+   "data": "2024-03-06",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000028/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000028/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 1044.0,
+   "objeto": "Aquisição de material de conusmo- itens de higiene e limpeza para Diretoria de Ensino Região Bauru.",
+   "data": "2024-03-27",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000065/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000065/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 8302.0,
+   "objeto": "Aquisição de material de consumo - Medalhas",
+   "data": "2024-04-10",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000066/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000066/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 4453.05,
+   "objeto": "Aquisição de Material de Consumo - Materiais Esportivos",
+   "data": "2024-04-10",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000069/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000069/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 3242.4,
+   "objeto": "Aquisição de material de conusmo- itens de higiene e limpeza para Diretoria de Ensino Região Bauru.  ",
+   "data": "2024-04-11",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000075/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000075/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 866.0,
+   "objeto": "Aquisição de Material de Consumo - Gêneros Alimentícios ",
+   "data": "2024-04-12",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000130/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000130/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 15033.06,
+   "objeto": "A aquisição se faz necessária para atender as necessidades das escolares: Aldeia Teregua, Escola Ayrton Busch, Aldeia Nimuendaju, Aldeia Ekerua, Escola Ernesto Monte, Escola Guia Lopes e Aldeia Kopenoti durente o ano de 2024, em virtude do bloqueio do recurso PDDE Paulista e da APM das unidades.",
+   "data": "2024-04-26",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000204/2026": {
+   "modalidade": "Pregão - Eletrônico",
+   "numeroControlePNCP": "46384111000140-1-000204/2026",
+   "amparo": "Lei 14.133/2021, Art. 28, I",
+   "valor": 394292964.99,
+   "objeto": "Contratação centralizada de serviços de transporte de passageiros, mediante fretamento, em caráter eventual, com a disponibilização de veículos adequados e cobrança por prestação de serviço e quilômetro rodado, visando ao atendimento das demandas das Unidades Regionais de Ensino da rede pública estadual de educação do Estado de São Paulo, para o deslocamento de alunos e respectivos acompanhantes nos eventos promovidos pela Secretaria da Educação.",
+   "data": "2026-03-13",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000221/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000221/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 1584.0,
+   "objeto": "Toalha de Papel - Interfolhas",
+   "data": "2024-05-21",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000540/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000540/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 800.8,
+   "objeto": "Aquisição de material de consumo- óleo de soja para atender à retomada das aulas das unidades EE Senador Rodolfo Miranda e Etec Astor de Mattos Carvalho.",
+   "data": "2024-07-24",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000808/2024": {
+   "modalidade": "Pregão - Eletrônico",
+   "numeroControlePNCP": "46384111000140-1-000808/2024",
+   "amparo": "Lei 14.133/2021, Art. 28, I",
+   "valor": 823499.0,
+   "objeto": "Serviço de limpeza, asseio e conservação predial.",
+   "data": "2024-08-27",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-000918/2024": {
+   "modalidade": "Dispensa",
+   "numeroControlePNCP": "46384111000140-1-000918/2024",
+   "amparo": "Lei 14.133/2021, Art. 75, II",
+   "valor": 8460.48,
+   "objeto": "A contratação em questão se faz necessária para atender a necessidade das escolas E.E. Raymi Oliveira Baptista Pereira, E.E. Plinio Ferraz, E.E. Francisco Alves Brizola e E.E. Seth de Almeida.",
+   "data": "2024-09-09",
+   "situacao": "Divulgada no PNCP"
+  },
+  "46384111000140-1-001580/2025": {
+   "modalidade": "Pregão - Eletrônico",
+   "numeroControlePNCP": "46384111000140-1-001580/2025",
+   "amparo": "Lei 14.133/2021, Art. 28, I",
+   "valor": 1526954.18,
+   "objeto": "Registro de preços para contratação(ões) futura(s) de aquisição de Kit Lanche, para atendimento aos Estudantes da Rede Estadual de Ensino nos dias de eventos de premiação da Olimpíada Interpreta SP (OLISP 2025), com prazo de vigência de até 12 (doze) meses",
+   "data": "2025-10-20",
+   "situacao": "Divulgada no PNCP"
+  }
+ }
+}

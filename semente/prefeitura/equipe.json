@@ -1,0 +1,296 @@
+{
+ "fonte": "https://www2.bauru.sp.gov.br/equipe_governo.aspx",
+ "coletado_em": "2026-11-14T11:36",
+ "pessoas": [
+  {
+   "id": "124",
+   "cargo": "Prefeita",
+   "nome": "Suéllen Silva Rosim",
+   "fones": [
+    "(014) 3235-1000"
+   ],
+   "endereco": "Praça das Cerejeiras, 1-59, Vila Noemy",
+   "curriculo": "",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/124.jpg",
+   "foto": true
+  },
+  {
+   "id": "126",
+   "cargo": "Vice-Prefeito",
+   "nome": "Orlando Costa Dias",
+   "fones": [
+    "(014) 3235-1000"
+   ],
+   "endereco": "Praça das Cerejeiras, 1-59, Vila Noemy",
+   "curriculo": "Médico, Ortopedista. Foi Diretor de plano de sáude, superintendente da UNIMED Bauru.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/126.jpg",
+   "foto": true
+  },
+  {
+   "id": "157",
+   "cargo": "Gabinete",
+   "nome": "Leonardo Marcari",
+   "fones": [
+    "(014) 3235-1000"
+   ],
+   "endereco": "Praça das Cerejeiras, 1-59, Vila Noemy",
+   "curriculo": "Formado em Administração de Empresas, Bacharel em Direito, integrou a equipe de governo da gestão como assessor do gabinete desde o início.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/157.jpg",
+   "foto": true
+  },
+  {
+   "id": "134",
+   "cargo": "Secretaria de Administração",
+   "nome": "Cristiano Ricardo Zamboni",
+   "fones": [
+    "(014) 3235-1278"
+   ],
+   "endereco": "Rua Rio Branco nº 5-05 - esquina com Presidente Kennedy – Centro – CEP. 17010-190",
+   "curriculo": "Formado em Análise de Sistemas pelo Unisagrado. Servidor de carreira há 27 anos, diretor da Divisão de Licitação da Secretaria da Administração.",
+   "pagina": "https://www2.bauru.sp.gov.br/administracao",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/134.jpg",
+   "foto": true
+  },
+  {
+   "id": "186",
+   "cargo": "Secretaria de Agricultura e Abastecimento",
+   "nome": "Jorge Luís de Souza",
+   "fones": [
+    "(14) 98187-3807",
+    "(14) 3236-1462"
+   ],
+   "endereco": "Av. Comendador José da Silva Martha quadra 36 - Recinto Mello de Moraes",
+   "curriculo": "Servidor de carreira há 29 anos, Formado em Gestão Ambiental. Passou pela Secretaria de Obras - Ajudante Geral de 1991 a 1992; Secretaria de Saúde - Agente de Saneamento de 1992 a 1999; Secretaria de Meio Ambiente - Chefe de Seção de Estudos e Conscientização Ambiental de 2000 a 2011; Secretaria das Administrações Regionais - Sear - Chefe de Seção de Limpeza Pública de 2011 a 2013; Secretaria da Administrações Regionais - Sear - Diretor de Divisão de Administração e Expediente de 2013 a 2018; Secretaria das Administrações Regionais - Sear - Chefe de Seção de Execução de 2018.",
+   "pagina": "https://www2.bauru.sp.gov.br/sagra",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/186.jpg",
+   "foto": true
+  },
+  {
+   "id": "159",
+   "cargo": "Secretaria de Aprovação de Projetos",
+   "nome": "Rafaela Cristina Foganholi da Silva",
+   "fones": [
+    "Atendimento ao público – 3235-1423"
+   ],
+   "endereco": "Rua Wenceslau Braz, 8-8, Vila Souto",
+   "curriculo": "Servidora Pública há 15 anos. Diretora do Expediente na Secretaria de Desenvolvimento Econômico, Turismo e Renda - SEDECON, atuou na Controladoria Geral do Município por 2 anos. Formada em Gestão Pública pela Faculdade Anhanguera de Bauru. Possui MBA em Finanças e Controladoria pela Faculdade Anhanguera Bauru e Pós-Graduação em Gestão Pública pela Faculdade Unifael.",
+   "pagina": "https://www2.bauru.sp.gov.br/seplan",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/159.jpg",
+   "foto": true
+  },
+  {
+   "id": "181",
+   "cargo": "Secretaria de Assistência Social",
+   "nome": "Ellen de Oliveira Rosetto Silva",
+   "fones": [
+    "(014) 3227-8624",
+    "(Cadastro Único) (014) 3223-2849"
+   ],
+   "endereco": "Rua Virgílio Malta, 2-42 - Centro",
+   "curriculo": "Assistente Social, Mestre em Serviço Social (UNESP - Franca), Especialista em Gestão de Políticas Públicas e do Terceiro Setor (Ite-Bauru)\nExperiência de 20 anos na área pública, (Assistência Social, Saúde e Educação), Elaboração de projetos sociais, Gestão de benefícios e de Recursos Financeiros. Desde 2015 é professora do Centro Universitário de Bauru (ITE).",
+   "pagina": "https://www2.bauru.sp.gov.br/smas",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/181.jpg",
+   "foto": true
+  },
+  {
+   "id": "183",
+   "cargo": "Secretaria de Comunicação e Eventos",
+   "nome": "Gabrielle Gabas",
+   "fones": [
+    "(014) 3235-1095"
+   ],
+   "endereco": "Praça das Cerejeiras, 1-59, Vila Noemy",
+   "curriculo": "Gabrielle Gabas é jornalista, formada em Comunicação Social, com MBAs em Branding, Marketing e Growth, além de pós-graduação em Neurobranding e Neuromarketing. Possui experiência em Comunicação Institucional e gestão estratégica da comunicação pública e corporativa, atuando no desenvolvimento de campanhas, projetos de comunicação interna e iniciativas voltadas ao fortalecimento do relacionamento entre organizações e seus públicos.\n\nCom perfil estratégico, tem experiência na liderança de equipes e na condução de ações integradas de comunicação, com destaque para planejamento, posicionamento institucional e engajamento.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/183.jpg",
+   "foto": true
+  },
+  {
+   "id": "178",
+   "cargo": "Secretaria de Cultura",
+   "nome": "Roger Barude Camargo",
+   "fones": [
+    "(014) 3235-9350",
+    "(014) 3235-9361"
+   ],
+   "endereco": "Av. Nações Unidas, 8-9, Centro",
+   "curriculo": "Roger Barude é advogado, foi eleito vereador em 2016. No início de 2020 licenciou-se do mandato na Câmara Municipal para assumir um cargo no Procon estadual. Barude já foi assessor parlamentar, diretor de esportes e secretário da Semel de 2012 a 2016, e de 2024 a 2025, e chefe de Gabinete da prefeitura em 2024.",
+   "pagina": "https://www2.bauru.sp.gov.br/cultura",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/178.jpg",
+   "foto": true
+  },
+  {
+   "id": "184",
+   "cargo": "Secretaria de Desenvolvimento Econômico, Turismo e Inovação",
+   "nome": "Carlos Agra",
+   "fones": [
+    "(014) 3227-7819"
+   ],
+   "endereco": "Av. Duque de Caxias, 16-55, Vila Cardia CEP 17011-066",
+   "curriculo": "Possui mais de 40 anos de experiência na área de comunicação. Formado em Administração com especialização em Marketing, atuou por dez anos na Rede Globo de São Paulo, e trabalhou em Bauru nas antigas Rede Globo Oeste Paulista e TV Modelo, e na atual TV Tem, fazendo a gestão comercial e institucional nas emissoras.",
+   "pagina": "https://www2.bauru.sp.gov.br/sedecon",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/184.jpg",
+   "foto": true
+  },
+  {
+   "id": "171",
+   "cargo": "Secretaria de Educação",
+   "nome": "Nilson Ghirardello",
+   "fones": [
+    "(014) 3235-1314"
+   ],
+   "endereco": "Alameda Dama da Noite, 3-14, Parque Vista Alegre",
+   "curriculo": "Doutor em Arquitetura e Urbanismo pela FAU-USP (1999), Mestre em Arquitetura e Urbanismo pela USP de São Carlos (1992), especialista em Engenharia de Segurança do Trabalho. Graduado em Arquitetura e Urbanismo pela PUC-Campinas (1983). Professor Assistente Doutor do Departamento de Arquitetura, Urbanismo e Paisagismo e do Programa de Pós-Graduação em Arquitetura e Urbanismo da FAAC- Faculdade de Arquitetura, Artes e Comunicação da Unesp de Bauru. Foi diretor e vice-diretor da FAAC e Presidente do Grupo Administrativo do Campus (GAC) de Bauru. Em 2020, lançou o e-book, pela Editora ANAP, denominado ‘Bauru em Temas Urbanos’, onde aborda a formação da cidade até os dias atuais e alguns de seus problemas. Membro dos seguintes Conselhos, alguns, por mais de uma gestão: Condephaat, foi presidente do Codepac, CREA-SP, CAU-SP, Conselho Universitário da Unesp, Fundunesp e Editora da Unesp. Condecorado com a Medalha do Pacificador, do Exército Brasileiro. Em Bauru, foi secretário de Planejamento e e do Meio Ambiente.",
+   "pagina": "https://www2.bauru.sp.gov.br/educacao",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/171.jpg",
+   "foto": true
+  },
+  {
+   "id": "176",
+   "cargo": "Secretaria de Esportes e Lazer",
+   "nome": "Leandro Avila Rodrigues (Foguinho)",
+   "fones": [
+    "(014) 3218-6125"
+   ],
+   "endereco": "Rua Raposo Tavares, 8-38, Vila Santo Antônio",
+   "curriculo": "Formado em Educação Física, com MBA em Gestão e Marketing Esportivo. Fundador do Centro de Formação de Atletas Foguinho Sports e da Foguinho Sports Ltda, desde 2005. Prestou serviços junto ao Desportivo Brasil, entre 2008 e 2011, e ao São Paulo Futebol Clube, entre 2012 e 2015, e foi coordenador das categorias de base do Esporte Clube Noroeste, em 2024.",
+   "pagina": "https://www2.bauru.sp.gov.br/semel",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/176.jpg",
+   "foto": true
+  },
+  {
+   "id": "164",
+   "cargo": "Secretaria da Fazenda",
+   "nome": "Everson Demarchi",
+   "fones": [
+    "(014) 3235-1496"
+   ],
+   "endereco": "Rua Araujo Leite 17-47, Centro",
+   "curriculo": "Servidor de carreira há 30 anos. Mestre em Desenvolvimento Regional e Meio Ambiente pela Universidade de Araraquara, especialista em Gestão de Organizações Públicas pela Unesp de Bauru, graduado em Ciências Econômicas pela ITE. Atualmente é professor do Centro Universitário de Bauru (ITE), exerceu o cargo de Controlador Geral do Município, secretário de Administração, secretário de Finanças, presidente da Emdurb e presidente da Cohab.",
+   "pagina": "https://www2.bauru.sp.gov.br/financas",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/164.jpg",
+   "foto": true
+  },
+  {
+   "id": "180",
+   "cargo": "Secretaria de Habitação",
+   "nome": "Tábata Pinheiro",
+   "fones": [
+    "(014) 3235-1420"
+   ],
+   "endereco": "Rua Wenceslau Braz, 8-8, Vila Souto",
+   "curriculo": "Arquiteta e Urbanista graduada pela Unimar, com mais de 15 anos de atuação no setor. Possui experiência em planejamento de obras e gestão estratégica de projetos, com destaque em licenciamento, aprovações e desenvolvimento de projetos para loteamentos. Especialista em habitação de interesse social e regularização urbana.",
+   "pagina": "https://www2.bauru.sp.gov.br/habitacao",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/180.jpg",
+   "foto": true
+  },
+  {
+   "id": "145",
+   "cargo": "Secretaria de Infraestrutura",
+   "nome": "Pérola Mota Zanotto",
+   "fones": [
+    "(014) 3235-1418"
+   ],
+   "endereco": "Wenceslau Braz, nº 8-8, Vila Souto",
+   "curriculo": "Servidora de carreira há 12 anos. Formada em Arquitetura e Urbanismo pela Universidade Católica de Santos. Especialista em Engenharia de Segurança do Trabalho pela Universidade Estadual Paulista Júlio de Mesquita Filho - UNESP - Bauru. Especialista em Gestão Pública pela Faculdade Anhanguera de Bauru. Especialista em Auditoria, Avaliações e Perícias de Engenharia pelo Instituto de Pós-graduação e Graduação IPOG. MBA em Mobilidade Urbana pela Universidade Pitágoras Unopar Anhanguera.",
+   "pagina": "https://www2.bauru.sp.gov.br/obras",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/145.jpg",
+   "foto": true
+  },
+  {
+   "id": "187",
+   "cargo": "Secretaria de Meio Ambiente e Bem-Estar Animal",
+   "nome": "Jurandir Sergio Posca",
+   "fones": [
+    "(014) 3235-1400"
+   ],
+   "endereco": "Rua Wenceslau Braz 8-08, Vila Souto",
+   "curriculo": "Empresário atuante em Bauru desde 1991, com destaque para a liderança e compromisso com o progresso local. Foi presidente do Conseg por três mandatos, promovendo a segurança pública e fortalecendo laços com a comunidade. Contribuiu como vice-presidente da Creche Rodrigues de Abreu, e no setor empresarial, atuou na Acib como diretor de Expansão, incentivando o crescimento econômico. Atual vice-presidente do Esporte Clube Noroeste. Teve papel essencial na criação da Lei dos Distritos Industriais.",
+   "pagina": "https://www2.bauru.sp.gov.br/semma",
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/187.jpg",
+   "foto": true
+  },
+  {
+   "id": null,
+   "cargo": "Secretaria de Negócios Jurídicos",
+   "nome": "Jader Luis Speranza",
+   "fones": [
+    "(014) 3235-1362",
+    "(014)3235-1398"
+   ],
+   "endereco": "Rua Araújo Leite nº 32-70, Vila Aeroporto",
+   "curriculo": "INTERINO",
+   "pagina": "https://www2.bauru.sp.gov.br/juridico",
+   "foto_url": null,
+   "foto": false
+  },
+  {
+   "id": null,
+   "cargo": "Secretaria de Serviços Urbanos",
+   "nome": "Mario Eduardo Pereira Ricci",
+   "fones": [
+    "(014) 3235-1435"
+   ],
+   "endereco": "Rua Wenceslau Braz n.º 8-8, Vl. Souto, Bauru/SP",
+   "curriculo": ".",
+   "pagina": "https://www2.bauru.sp.gov.br/sear",
+   "foto_url": null,
+   "foto": false
+  },
+  {
+   "id": "174",
+   "cargo": "Departamento de Água e Esgoto",
+   "nome": "João Carlos Viegas de Souza",
+   "fones": [
+    "(014) 3235-6100"
+   ],
+   "endereco": "R. Padre João 11-25",
+   "curriculo": "Formado em Administração de Empresas pela Faculdade Portoalegrense e em Engenharia Civil pela Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS). Possui mais de 40 anos de experiência nos segmentos de obras e saneamento básico, com passagens por diversas empresas.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/174.jpg",
+   "foto": true
+  },
+  {
+   "id": "182",
+   "cargo": "EMDURB",
+   "nome": "Donizete do Carmo dos Santos",
+   "fones": [
+    "(014) 3233-9000"
+   ],
+   "endereco": "Praça João Paulo I - s/n",
+   "curriculo": "Servidor de carreira há 30 anos, formado em Finanças (2006) pelo Instituto de Ensino Superior de Bauru; MBA em Gestão Pública (2013) pela Faculdade Anhanguera de Bauru; MBA em Gestão de Projetos - área de conhecimento: Negócios, administração e direito (2021) pela Universidade Anhanguera Uniderp; Secretário Municipal das Administrações Regionais em 2019; Secretário Municipal da Administração de 2019 a 2020; Presidente Fundação de Previdência dos Servidores Públicos Municipais – FUNPREV, nos períodos de 2015 a 2019, de 2021 a 2022 e de 2025 a 2026; Presidente da EMDURB de 2023 a 2024.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/182.jpg",
+   "foto": true
+  },
+  {
+   "id": "168",
+   "cargo": "COHAB",
+   "nome": "Everton Basilio",
+   "fones": [
+    "(014) 3235-9222"
+   ],
+   "endereco": "Av. Nações Unidas, 30-31",
+   "curriculo": "Servidor de carreira da Prefeitura de Bauru, formado em Administração de Empresas e pós-graduado em Direito Administrativo. Ingressou na prefeitura como Técnico em Gestão de Convênios e já exerceu cargos dentro da Secretaria de Finanças, como chefe de Seção de Tomada de Contas, consultor financeiro, diretor de Departamento de Finanças e foi secretário de Finanças de 2021 a 2024.",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/168.jpg",
+   "foto": true
+  },
+  {
+   "id": "170",
+   "cargo": "Fundo Social de Solidariedade de Bauru",
+   "nome": "Elaine Lucia Palloni Costa Dias",
+   "fones": [
+    "(014) 98187-0078"
+   ],
+   "endereco": "Praça das Cerejeiras, 1-59",
+   "curriculo": "",
+   "pagina": null,
+   "foto_url": "https://www2.bauru.sp.gov.br/arquivos/imagens/diversos/equipe_governo/170.jpg",
+   "foto": true
+  }
+ ]
+}

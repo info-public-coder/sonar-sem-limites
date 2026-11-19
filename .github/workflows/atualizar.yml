@@ -52,13 +52,13 @@ jobs:
       - name: Completar com a semente o que faltar (fontes que recusam o GitHub)
         run: |
           mkdir -p dados
-          cp -rn semente/prefeitura semente/diretoria dados/ 2>/dev/null || true
+          cp -rn semente/prefeitura semente/diretoria semente/gastos dados/ 2>/dev/null || true
           # A semente traz a data real da coleta feita no computador local.
-          for f in semente/diretoria/estado.json; do
+          for f in semente/diretoria/estado.json semente/gastos/estado.json; do
             [ -f "$f" ] && python - "$f" <<'EOF'
-          import json, sys
+          import json, os, sys
           semente = json.load(open(sys.argv[1], encoding="utf-8"))
-          caminho = "dados/diretoria/estado.json"
+          caminho = os.path.join("dados", os.path.basename(os.path.dirname(sys.argv[1])), "estado.json")
           try:
               atual = json.load(open(caminho, encoding="utf-8"))
           except Exception:
@@ -69,7 +69,7 @@ jobs:
           json.dump(atual, open(caminho, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
           EOF
           done
-          ls dados/prefeitura dados/diretoria
+          ls dados/prefeitura dados/diretoria dados/gastos
 
       - name: Arquivo anual do TCE-SP (so se ainda nao existir; ~2 GB lidos em fluxo)
         run: |

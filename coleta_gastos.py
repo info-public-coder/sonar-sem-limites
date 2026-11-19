@@ -127,7 +127,17 @@ def pncp_paginado(caminho, params):
     while True:
         q = "&".join(f"{k}={v}" for k, v in {**params, "pagina": pagina,
                                               "tamanhoPagina": POR_PAGINA}.items())
-        dados = baixar(f"{PNCP}/{caminho}?{q}")
+        for rodada in range(3):
+            # O PNCP cai com frequencia: se a pagina falhar as 5 tentativas, espera
+            # 1 minuto e insiste (ate 3 rodadas) antes de perder o ano inteiro.
+            try:
+                dados = baixar(f"{PNCP}/{caminho}?{q}")
+                break
+            except RuntimeError:
+                if rodada == 2:
+                    raise
+                print(f"\n    pagina {pagina} falhou; esperando 60s para insistir", file=sys.stderr)
+                time.sleep(60)
         if not dados or dados.get("empty"):
             break
         total = dados.get("totalRegistros")
@@ -181,7 +191,8 @@ def main():
     if "--ano" in sys.argv:
         anos = [int(sys.argv[sys.argv.index("--ano") + 1])]
     est = estado.ler(PASTA)
-    for ano in anos:
+    # Ano corrente primeiro: e o que mais importa e o que mais muda.
+    for ano in sorted(anos, reverse=True):
         if ano < hoje.year and not tudo and ano_fechado_recente(est, ano):
             print(f"  PNCP {ano}: ano encerrado, coletado ha menos de {DIAS_ANO_FECHADO} dias; mantido (use --tudo para forcar)")
             continue

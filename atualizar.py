@@ -23,15 +23,19 @@ import subprocess
 import sys
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
+# Tempo maximo de cada script. O PNCP e lento e cai com frequencia: a coleta de
+# gastos ganha 2 horas; os demais, 1 hora.
+LIMITE_SEGUNDOS = {"coleta_gastos.py": 7200}
 
 
 def rodar(script, obrigatorio):
     print(f"\n=== {script} ===", flush=True)
     try:
         # Limite de 1 hora: um servidor que trava a conexao nao pode segurar o resto.
-        codigo = subprocess.call([sys.executable, "-u", os.path.join(RAIZ, script)], cwd=RAIZ, timeout=3600)
+        limite = LIMITE_SEGUNDOS.get(script, 3600)
+        codigo = subprocess.call([sys.executable, "-u", os.path.join(RAIZ, script)], cwd=RAIZ, timeout=limite)
     except subprocess.TimeoutExpired:
-        print(f"--- {script} passou de 1 hora e foi interrompido", flush=True)
+        print(f"--- {script} passou do limite de {limite // 60} minutos e foi interrompido", flush=True)
         codigo = 124
     if codigo != 0:
         aviso = "ERRO" if obrigatorio else "aviso"
@@ -72,18 +76,20 @@ def main():
 SEMENTE = {
     "prefeitura": ["equipe.json"],
     "diretoria": ["equipe.json", "folha.json", "servidores.json", "pagamentos.json", "pncp.json", "estado.json"],
+    # PNCP: o GitHub consegue coletar, mas o servidor cai muito; a semente evita pagina vazia.
+    "gastos": ["pncp_*.json", "estado.json"],
 }
 
 
 def renovar_semente():
+    import glob
     import shutil
     copiados = 0
     for pasta, arquivos in SEMENTE.items():
         os.makedirs(os.path.join(RAIZ, "semente", pasta), exist_ok=True)
-        for nome in arquivos:
-            origem = os.path.join(RAIZ, "dados", pasta, nome)
-            if os.path.exists(origem):
-                shutil.copy2(origem, os.path.join(RAIZ, "semente", pasta, nome))
+        for padrao in arquivos:
+            for origem in glob.glob(os.path.join(RAIZ, "dados", pasta, padrao)):
+                shutil.copy2(origem, os.path.join(RAIZ, "semente", pasta, os.path.basename(origem)))
                 copiados += 1
     print(f"  semente/ renovada ({copiados} arquivos). Envie para o GitHub para o robo usar.")
 

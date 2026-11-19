@@ -1,0 +1,30 @@
+{
+ "tce_despesas_ano_corrente": {
+  "ultima_boa": "2026-11-14T05:06:41",
+  "registros": 93739
+ },
+ "pncp_contratos_2025": {
+  "ultima_boa": "2026-11-14T03:04:26",
+  "registros": 5562
+ },
+ "pncp_dispensa_2025": {
+  "ultima_boa": "2026-11-14T03:06:15",
+  "registros": 54
+ },
+ "pncp_inexigibilidade_2025": {
+  "ultima_boa": "2026-11-14T03:08:15",
+  "registros": 80
+ },
+ "pncp_contratos_2026": {
+  "ultima_boa": "2026-11-14T06:08:44",
+  "registros": 4940
+ },
+ "pncp_dispensa_2026": {
+  "ultima_boa": "2026-11-14T06:09:38",
+  "registros": 30
+ },
+ "pncp_inexigibilidade_2026": {
+  "ultima_boa": "2026-11-14T06:10:37",
+  "registros": 50
+ }
+}
